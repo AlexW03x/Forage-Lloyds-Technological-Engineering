@@ -21,7 +21,7 @@ export default function NavigationContext(){
     return(
         <>
             <nav class="w-[100%] min-h-[50px] bg-[var(--lloyds-black)] 
-            flex flex-row 2xl:px-32 sm:px-6 px-0 items-center sm:gap-x-8 overflow-x-hidden 
+            flex flex-row 2xl:px-64 sm:px-8 px-0 items-center sm:gap-x-8 overflow-x-hidden 
              font-semibold 2xl:text-lg sm:text-md text-sm text-center underline-offset-4">
                 <button class={`${handleBackground("Personal")} h-[50px] px-4 max-w-[25%] hover:underline decoration-1`}>Personal</button>
                 <button class={`${handleBackground("Business")} min-h-full px-4 max-w-[25%] hover:underline decoration-1`}>Business</button>
