@@ -12,7 +12,7 @@ export default function Navigation(){
                     <p class="text-2xl font-bold sm:block hidden">LLOYDS</p>
                 </div>
 
-                <button class="w-auto h-full hover:bg-[var(--lloyds-white)] defaultTransition text-[var(--lloyds-black)] 
+                <button class="w-auto lg:min-w-[120px] h-full hover:bg-[var(--lloyds-white)] defaultTransition text-[var(--lloyds-black)] 
                 font-semibold flex sm:flex-row flex-col items-center justify-center gap-x-4 px-4 lg:mr-[10%] 2xl:mr-[35%] lg:ml-[10%]">
                     <img class="h-[20px] w-[20px]" src={Hamburger} draggable="false"/>
                     Menu
