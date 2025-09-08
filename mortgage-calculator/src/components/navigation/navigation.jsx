@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Hamburger, Logo, Lock, Search, Audio } from "../assets";
+import { Hamburger, Logo, Lock, Search, Audio } from "../../assets";
 
 export default function Navigation(){
     return(
