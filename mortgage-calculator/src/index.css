@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root{
 
   /* Primary Colours */
@@ -31,3 +35,15 @@
 
 /* media queries */
 /* although using tailwindcss, in this product there may be some specific cases where custom css is needed */
+
+
+/* web settings */
+body{
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* prevent horizontal scroll */
+  min-height: auto;
+  height: screen;
+  background-color: var(--lloyds-white);
+  width: screen;
+}
