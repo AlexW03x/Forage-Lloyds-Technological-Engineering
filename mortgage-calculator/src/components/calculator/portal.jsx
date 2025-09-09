@@ -4,6 +4,7 @@ import Helper from "./helper";
 import Notice from "./notice";
 import Input from "./input";
 import { Lock } from "../../assets";
+import Slider from "./slider";
 
 export default function Portal(){
 
@@ -46,6 +47,8 @@ export default function Portal(){
 
                         <Input type="text" label="Your Deposit (£):" placeholder="Enter Deposit Amount (£)"
                         classExtensions={"mt-6 flex justify-center sm:-ml-1"}></Input>
+
+                        <Slider label="Mortgage Terms: (Years)" values={{min: 1, max: 40, default: 25}} classExtensions={"mt-6 flex sm:justify-center sm:-ml-1"}></Slider>
                         
                     </div>
 

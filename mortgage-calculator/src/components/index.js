@@ -5,6 +5,7 @@ import Portal from "./calculator/portal";
 import Helper from "./calculator/helper";
 import Notice from "./calculator/notice";
 import Input from "./calculator/input";
+import Slider from "./calculator/slider";
 
 export {
     NavigationContext,
@@ -16,4 +17,5 @@ export {
     Helper,
     Notice,
     Input,
+    Slider,
 }
