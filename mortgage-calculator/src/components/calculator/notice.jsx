@@ -39,8 +39,8 @@ export default function Notice({logo, description}){
                     <img src={noticeLogo} alt={noticeLogoAlt} className={`w-[20px] h-[20px]`} draggable="false"/>
                 </div>
 
-                <div className="w-full min-h-[50px] h-auto px-2 flex flex-col items-center justify-center">
-
+                <div className="w-full min-h-[50px] h-auto px-2 flex flex-col justify-center">
+                    <p className="text-[var(--lloyds-black)] text-md font-semibold whitespace-pre-line">{description}</p>
                 </div>
 
             </div>

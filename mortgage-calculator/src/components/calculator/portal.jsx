@@ -17,6 +17,10 @@ export default function Portal(){
         "Calculator": {
             title: "Mortgage Calculator",
             description: "This is a basic mortgage calculator that allows you to input your mortgage details and see an estimate of your monthly payments. Please note that this is for informational purposes only and does not constitute financial advice."
+        },
+        "Calculator_Notice": {
+            logo: "success",
+            description: "Lets get started!\nPlease enter your details into the boxes below"
         }
     }
 
@@ -31,7 +35,7 @@ export default function Portal(){
 
                     <div className="w-full h-[480px] flex flex-col bg-[var(--lloyds-grey-subtle)] border-b-[1px] border-[var(--lloyds-dark-green)]/40 py-4">
                         {/* Calculator content will go here */}
-                        <Notice logo="info" title="Information" description="This is an informational notice."/>
+                        <Notice logo={texts.Calculator_Notice.logo} description={texts.Calculator_Notice.description}/>
                     </div>
             </div>
         </>
