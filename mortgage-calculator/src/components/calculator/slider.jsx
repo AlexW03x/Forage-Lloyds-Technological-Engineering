@@ -9,15 +9,11 @@ export default function Slider({label="", values={min: 0, default: 25, max:100},
 
     const [curValue, setCurValue] = useState(values.default); //set to minimum
 
-    useEffect(() => {
-        try{
-            onChange(curValue); //update the functional value from other component
-        }
-        catch{
-            
-        }
-        //console.log("Value Updated!"); debug
-    }, [curValue]);
+    const updateValue = (e) => {
+        setCurValue(e);
+        if (onChange) onChange(e);
+    };
+
 
     return(
         <>
@@ -25,13 +21,20 @@ export default function Slider({label="", values={min: 0, default: 25, max:100},
                 <p className="font-semibold text-md sm:w-[150px] sm:text-right">{label} 
                     <span className="sm:block hidden"></span>
                     (
-                    <span className="text-[var(--lloyds-dark-green)] font-bold">{curValue} </span> 
+                    <span className="text-[var(--lloyds-dark-green)] font-bold">{value} </span> 
                     Years)
                      
                 </p>
-                <input id="range" type="range" min={values.min} max={values.max} step={1}
-                className="rounded-md h-[40px] sm:max-w-[300px] w-[100%]  outline-none drop-shadow-[0_0_1px_black] focus:drop-shadow-[0_0_2px_green]
-                hue-rotate-[150deg] saturate-200" onChange={(e) => {setCurValue(e.target.value)}} value={value}>
+                <input 
+                    id="range" 
+                    type="range" 
+                    min={values.min} 
+                    max={values.max} 
+                    step={1} 
+                    value={value}
+                    className="rounded-md h-[40px] sm:max-w-[300px] w-[100%]  outline-none drop-shadow-[0_0_1px_black] focus:drop-shadow-[0_0_2px_green]
+                    hue-rotate-[150deg] saturate-200" 
+                    onChange={(e) => {updateValue(e.target.value)}}>
                 </input>
 
                 <div className="sm:max-w-[300px] sm:w-[100%] w-[95%] absolute h-[20px] sm:ml-[165px] sm:mt-10 mt-16">

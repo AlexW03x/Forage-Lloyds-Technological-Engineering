@@ -11,9 +11,9 @@ export default function Portal(){
     const [curPage, setCurPage] = useState("Beginning"); //used to identify segment where the portal is at
 
     //useStates for our input values
-    const [propertyValue, setPropertyValue] = useState(0);
-    const [depositAmount, setDepositAmount] = useState(0);
-    const [mortgageTerms, setMortgageTerms] = useState(0);
+    const [propertyValue, setPropertyValue] = useState("");
+    const [depositAmount, setDepositAmount] = useState("");
+    const [mortgageTerms, setMortgageTerms] = useState(25); //default years
 
     // onload function
     window.onload = async function(){
@@ -62,8 +62,9 @@ export default function Portal(){
     }
 
     const updateMortgageTerms = (newVal) => {
-        setMortgageTerms(newVal);
+        setMortgageTerms(Number(newVal));
         sessionStorage.setItem("mortgageTerms", newVal);
+        
     }
 
     return(
