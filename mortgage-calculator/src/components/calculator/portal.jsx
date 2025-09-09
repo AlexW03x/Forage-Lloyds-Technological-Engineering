@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Helper from "./helper";
 import Notice from "./notice";
 import Input from "./input";
@@ -10,9 +10,32 @@ export default function Portal(){
 
     const [curPage, setCurPage] = useState("Beginning"); //used to identify segment where the portal is at
 
+    //useStates for our input values
+    const [propertyValue, setPropertyValue] = useState(0);
+    const [depositAmount, setDepositAmount] = useState(0);
+    const [mortgageTerms, setMortgageTerms] = useState(0);
+
     // onload function
     window.onload = async function(){
         console.log("Portal Loaded");
+
+        //fetch user history if exists
+        try{
+            if(sessionStorage.getItem("propertyValue")){
+                setPropertyValue(sessionStorage.getItem("propertyValue"));
+            }
+
+            if(sessionStorage.getItem("depositAmount")){
+                setDepositAmount(sessionStorage.getItem("depositAmount"));
+            }
+
+            if(sessionStorage.getItem("mortgageTerms")){
+                setMortgageTerms(sessionStorage.getItem("mortgageTerms"));
+            }
+        }
+        catch{
+
+        }
     }
 
     // helper text
@@ -28,6 +51,20 @@ export default function Portal(){
     }
 
     //Storing our inputs for calculation
+    const updatePropertyValue = (newVal) => {
+        setPropertyValue(newVal);
+        sessionStorage.setItem("propertyValue", newVal);
+    }
+
+    const updateDepositValue = (newVal) => {
+        setDepositAmount(newVal);
+        sessionStorage.setItem("depositAmount", newVal);
+    }
+
+    const updateMortgageTerms = (newVal) => {
+        setMortgageTerms(newVal);
+        sessionStorage.setItem("mortgageTerms", newVal);
+    }
 
     return(
         <>
@@ -43,14 +80,14 @@ export default function Portal(){
                         <Notice logo={texts.Calculator_Notice.logo} description={texts.Calculator_Notice.description}/>
 
                         <Input type="text" label="Property Value (£):" placeholder="Enter Property Value (£)" 
-                        classExtensions={"mt-10 flex justify-center sm:-ml-1"}></Input>
+                        classExtensions={"mt-8 sm:mt-16 flex justify-center sm:-ml-1"} onChange={updatePropertyValue} value={propertyValue}></Input>
 
                         <Input type="text" label="Your Deposit (£):" placeholder="Enter Deposit Amount (£)"
-                        classExtensions={"mt-6 flex justify-center sm:-ml-1"}></Input>
+                        classExtensions={"mt-6 flex justify-center sm:-ml-1"} onChange={updateDepositValue} value={depositAmount}></Input>
 
                         <Slider label="Mortgage Terms:" 
                         values={{min: 1, max: 40, default: 25}} 
-                        classExtensions={"mt-6 flex sm:justify-center sm:-ml-1"}></Slider>
+                        classExtensions={"mt-6 flex sm:justify-center sm:-ml-1"} onChange={updateMortgageTerms}></Slider>
                         
                     </div>
 
