@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function Helper({title, description}){
+export default function Helper({title, description, classExtensions=null}){
 
     const [showHelp, setShowHelp] = useState(false);
 
@@ -11,7 +11,7 @@ export default function Helper({title, description}){
     return(
         <>
             <p
-             className="ml-2 text-3xl font-[400] text-[var(--lloyds-blue)]"><span onClick={() => {toggleHelp(!showHelp)}} className="cursor-pointer">ⓘ</span>
+             className={`ml-2 text-3xl font-[400] ${classExtensions}`}><span onClick={() => {toggleHelp(!showHelp)}} className={`cursor-pointer`}>ⓘ</span>
 
                 <span
                 className={`${showHelp ? "block" : "hidden"} w-[90%] left-5 sm:w-[300px] sm:left-auto sm:right-40 mt-2  

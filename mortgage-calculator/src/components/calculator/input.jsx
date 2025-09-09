@@ -1,12 +1,14 @@
 import { useState } from "react";
-
+import Helper from "./helper";
 
 //@params type == input field type so text, password, email, etc
 //@params label == String: title for input field
 //@params placeholder == String: placeholder text for label
 //@params onChange == Void: function to update e.target.value
 //@params classExtensions == String: add more classNames to div container
-export default function Input({type, label, placeholder, onChange=null, classExtensions=null}){
+export default function Input(
+    {type, label, placeholder, onChange=null, classExtensions=null}
+){
 
     const updateValues = (input) => {
         onChange(input); //pass values onto different component variables
