@@ -89,6 +89,11 @@ export default function Portal(){
                         <Slider label="Mortgage Terms:" 
                         values={{min: 1, max: 40, default: 25}} value={mortgageTerms}
                         classExtensions={"mt-6 flex sm:justify-center sm:-ml-1"} onChange={updateMortgageTerms}></Slider>
+
+
+                        <button className="w-[200px] h-[40px] rounded-md text-[var(--lloyds-white)]
+                         font-semibold bg-[var(--lloyds-dark-green)] mt-10 hover:opacity-70 focus:opacity-70
+                         drop-shadow-[0_0_1px_black] mx-auto sm:translate-x-28">Calculate</button>
                         
                     </div>
 
