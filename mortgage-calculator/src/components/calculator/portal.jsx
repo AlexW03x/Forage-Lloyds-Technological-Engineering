@@ -48,7 +48,9 @@ export default function Portal(){
                         <Input type="text" label="Your Deposit (£):" placeholder="Enter Deposit Amount (£)"
                         classExtensions={"mt-6 flex justify-center sm:-ml-1"}></Input>
 
-                        <Slider label="Mortgage Terms: (Years)" values={{min: 1, max: 40, default: 25}} classExtensions={"mt-6 flex sm:justify-center sm:-ml-1"}></Slider>
+                        <Slider label="Mortgage Terms:" 
+                        values={{min: 1, max: 40, default: 25}} 
+                        classExtensions={"mt-6 flex sm:justify-center sm:-ml-1"}></Slider>
                         
                     </div>
 
