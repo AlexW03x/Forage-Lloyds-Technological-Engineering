@@ -11,6 +11,7 @@
   --lloyds-black: #000000;
   --lloyds-white: #ffffff;
   --lloyds-grey: #f5f5f5;
+  --lloyds-grey-subtle: #f0f0f0;
   --lloyds-dark-grey: #4f4f4f;
   --lloyds-light-grey: #bdbdbd;
   --lloyds-blue: #0072ce;
@@ -46,4 +47,5 @@ body{
   height: screen;
   background-color: var(--lloyds-white);
   width: screen;
+  padding-bottom: 50px; /* to prevent content being hidden behind footer */
 }

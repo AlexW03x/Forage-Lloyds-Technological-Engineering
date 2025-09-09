@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import { Breadcrumbs, Navigation, NavigationContext } from './components';
+import { Breadcrumbs, Navigation, NavigationContext, Portal } from './components';
 
 export default function App(){
     return(
@@ -9,7 +9,8 @@ export default function App(){
             <Navigation/>
             <Breadcrumbs/>
 
-            
+            {/* Calculator Components */}
+            <Portal/>
         </>
     )
 }
