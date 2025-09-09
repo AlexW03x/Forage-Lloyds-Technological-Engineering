@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Helper from "./helper";
 import Notice from "./notice";
+import Input from "./input";
 
 export default function Portal(){
 
@@ -20,9 +21,11 @@ export default function Portal(){
         },
         "Calculator_Notice": {
             logo: "success",
-            description: "Lets get started!\nPlease enter your details into the boxes below"
+            description: "Lets get started, please enter your details into the boxes below!"
         }
     }
+
+    //Storing our inputs for calculation
 
     return(
         <>
@@ -36,6 +39,12 @@ export default function Portal(){
                     <div className="w-full h-[480px] flex flex-col bg-[var(--lloyds-grey-subtle)] border-b-[1px] border-[var(--lloyds-dark-green)]/40 py-4">
                         {/* Calculator content will go here */}
                         <Notice logo={texts.Calculator_Notice.logo} description={texts.Calculator_Notice.description}/>
+
+                        <div className="">
+                            <Input type="text" label="Property Value (£):" placeholder="Enter Property Value (£)"></Input>
+                            <Input type="text" label="Your Deposit (£):" placeholder="Enter Property Value (£)"></Input>
+                        </div>
+                        
                     </div>
             </div>
         </>

@@ -4,6 +4,7 @@ import Breadcrumbs from "./navigation/breadcrumbs";
 import Portal from "./calculator/portal";
 import Helper from "./calculator/helper";
 import Notice from "./calculator/notice";
+import Input from "./calculator/input";
 
 export {
     NavigationContext,
@@ -14,4 +15,5 @@ export {
     Portal,
     Helper,
     Notice,
+    Input,
 }

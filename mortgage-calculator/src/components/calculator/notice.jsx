@@ -35,7 +35,7 @@ export default function Notice({logo, description}){
                 logo === "warning" ? "border-[var(--lloyds-yellow)]" : logo === "error" ? "border-[var(--lloyds-red)]" : 
                 "border-[var(--lloyds-dark-green)]"} flex flex-row`}>
 
-                <div className="w-[50px] h-[50px] flex items-center justify-center">
+                <div className="w-[50px] h-auto flex items-center justify-center">
                     <img src={noticeLogo} alt={noticeLogoAlt} className={`w-[20px] h-[20px]`} draggable="false"/>
                 </div>
 
