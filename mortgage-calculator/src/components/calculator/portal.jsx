@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import Helper from "./helper";
+import Notice from "./notice";
 
 export default function Portal(){
 
@@ -11,17 +12,26 @@ export default function Portal(){
         console.log("Portal Loaded");
     }
 
+    // helper text
+    const texts = {
+        "Calculator": {
+            title: "Mortgage Calculator",
+            description: "This is a basic mortgage calculator that allows you to input your mortgage details and see an estimate of your monthly payments. Please note that this is for informational purposes only and does not constitute financial advice."
+        }
+    }
+
     return(
         <>
             <div className="max-w-[800px] w-[90%] h-[600px] mx-auto mt-[60px] bg-[var(--lloyds-grey)] 
             rounded-lg drop-shadow-[0_0_2px_var(--lloyds-dark-green)] flex flex-col">
                     <div className="w-full h-[60px] flex items-center justify-center font-bold text-lg border-b-[1px] border-[var(--lloyds-dark-green)]/40">
                         <p>Mortgage Calculator</p>
-                        <Helper title={"Mortgage Calculator"} description={"This is a mortgage calculator to help you estimate your monthly payments."}/>
+                        <Helper title={texts.Calculator.title} description={texts.Calculator.description}/>
                     </div>
 
-                    <div className="w-full h-[480px] flex flex-col bg-[var(--lloyds-grey-subtle)] border-b-[1px] border-[var(--lloyds-dark-green)]/40">
-
+                    <div className="w-full h-[480px] flex flex-col bg-[var(--lloyds-grey-subtle)] border-b-[1px] border-[var(--lloyds-dark-green)]/40 py-4">
+                        {/* Calculator content will go here */}
+                        <Notice logo="info" title="Information" description="This is an informational notice."/>
                     </div>
             </div>
         </>

@@ -3,6 +3,7 @@ import Navigation from "./navigation/navigation";
 import Breadcrumbs from "./navigation/breadcrumbs";
 import Portal from "./calculator/portal";
 import Helper from "./calculator/helper";
+import Notice from "./calculator/notice";
 
 export {
     NavigationContext,
@@ -12,4 +13,5 @@ export {
     // Calculator Components
     Portal,
     Helper,
+    Notice,
 }
