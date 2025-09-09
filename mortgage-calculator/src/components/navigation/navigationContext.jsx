@@ -20,13 +20,13 @@ export default function NavigationContext(){
 
     return(
         <>
-            <nav class="w-[100%] min-h-[50px] bg-[var(--lloyds-black)] 
+            <nav className="w-[100%] min-h-[50px] bg-[var(--lloyds-black)] 
             flex flex-row 2xl:px-64 sm:px-8 px-0 items-center sm:gap-x-8 overflow-x-hidden 
              font-semibold 2xl:text-lg sm:text-md text-sm text-center underline-offset-4">
-                <button class={`${handleBackground("Personal")} h-[50px] px-4 max-w-[25%] hover:underline decoration-1`}>Personal</button>
-                <button class={`${handleBackground("Business")} min-h-full px-4 max-w-[25%] hover:underline decoration-1`}>Business</button>
-                <button class={`${handleBackground("PrivateBanking")} min-h-full px-4 max-w-[25%] hover:underline decoration-1`}>Private Banking</button>
-                <button class={`${handleBackground("InternationalBanking")} min-h-full px-4 max-w-[25%] hover:underline decoration-1`}>International Banking</button>
+                <button className={`${handleBackground("Personal")} h-[50px] px-4 max-w-[25%] hover:underline decoration-1`}>Personal</button>
+                <button className={`${handleBackground("Business")} min-h-full px-4 max-w-[25%] hover:underline decoration-1`}>Business</button>
+                <button className={`${handleBackground("PrivateBanking")} min-h-full px-4 max-w-[25%] hover:underline decoration-1`}>Private Banking</button>
+                <button className={`${handleBackground("InternationalBanking")} min-h-full px-4 max-w-[25%] hover:underline decoration-1`}>International Banking</button>
             </nav>
         </>
     )
