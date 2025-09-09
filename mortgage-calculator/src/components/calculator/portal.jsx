@@ -40,10 +40,8 @@ export default function Portal(){
                         {/* Calculator content will go here */}
                         <Notice logo={texts.Calculator_Notice.logo} description={texts.Calculator_Notice.description}/>
 
-                        <div className="">
-                            <Input type="text" label="Property Value (£):" placeholder="Enter Property Value (£)"></Input>
-                            <Input type="text" label="Your Deposit (£):" placeholder="Enter Property Value (£)"></Input>
-                        </div>
+                        <Input type="text" label="Property Value (£):" placeholder="Enter Property Value (£)"></Input>
+                        <Input type="text" label="Your Deposit (£):" placeholder="Enter Property Value (£)"></Input>
                         
                     </div>
             </div>
