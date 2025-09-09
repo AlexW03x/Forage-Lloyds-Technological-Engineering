@@ -86,7 +86,7 @@ export default function Portal(){
                         classExtensions={"mt-6 flex justify-center sm:-ml-1"} onChange={updateDepositValue} value={depositAmount}></Input>
 
                         <Slider label="Mortgage Terms:" 
-                        values={{min: 1, max: 40, default: 25}} 
+                        values={{min: 1, max: 40, default: 25}} value={mortgageTerms}
                         classExtensions={"mt-6 flex sm:justify-center sm:-ml-1"} onChange={updateMortgageTerms}></Slider>
                         
                     </div>

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 //@params values: Object Dict => minimum & maximum range for slider in value
 //@params onChange: Void() => Update function to store value
 //@params classExtensions: String => Add classnames to input
-export default function Slider({label="", values={min: 0, default: 25, max:100}, onChange=null, classExtensions=null}){
+export default function Slider({label="", values={min: 0, default: 25, max:100}, onChange=null, classExtensions=null, value=null}){
 
     const [curValue, setCurValue] = useState(values.default); //set to minimum
 
@@ -31,7 +31,7 @@ export default function Slider({label="", values={min: 0, default: 25, max:100},
                 </p>
                 <input id="range" type="range" min={values.min} max={values.max} step={1}
                 className="rounded-md h-[40px] sm:max-w-[300px] w-[100%]  outline-none drop-shadow-[0_0_1px_black] focus:drop-shadow-[0_0_2px_green]
-                hue-rotate-[150deg] saturate-200" onChange={(e) => {setCurValue(e.target.value)}}>
+                hue-rotate-[150deg] saturate-200" onChange={(e) => {setCurValue(e.target.value)}} value={value}>
                 </input>
 
                 <div className="sm:max-w-[300px] sm:w-[100%] w-[95%] absolute h-[20px] sm:ml-[165px] sm:mt-10 mt-16">
