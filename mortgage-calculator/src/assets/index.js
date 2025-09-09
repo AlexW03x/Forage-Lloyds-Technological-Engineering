@@ -1,6 +1,6 @@
 import Logo from './Logo.png';
 import Hamburger from "./hamburger.png";
-import Lock from "./padlock.png";
+import Lock from "./padlock.webp";
 import Search from "./search.png";
 import Audio from "./mic.png";
 import CheckMark from "./check-mark.webp";

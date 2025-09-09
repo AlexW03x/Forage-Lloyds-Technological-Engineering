@@ -3,6 +3,7 @@ import { useState } from "react";
 import Helper from "./helper";
 import Notice from "./notice";
 import Input from "./input";
+import { Lock } from "../../assets";
 
 export default function Portal(){
 
@@ -41,7 +42,15 @@ export default function Portal(){
                         <Notice logo={texts.Calculator_Notice.logo} description={texts.Calculator_Notice.description}/>
 
                         <Input type="text" label="Property Value (£):" placeholder="Enter Property Value (£)"></Input>
-                        <Input type="text" label="Your Deposit (£):" placeholder="Enter Property Value (£)"></Input>
+                        <Input type="text" label="Your Deposit (£):" placeholder="Enter Deposit Amount (£)"></Input>
+                        
+                    </div>
+
+                    <div className="w-full h-[60px] flex flex-row items-center justify-center font-semibold text-lg">
+                        <p className="absolute text-[var(--lloyds-black)] bottom-1 left-3 text-xs flex flex-row">Safe & Secure 
+                            <img src={Lock} alt="Lock Icon" className="object-contain w-[15px] h-[15px] ml-1"></img>
+                        </p>
+
                         
                     </div>
             </div>
