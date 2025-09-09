@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-
+import Helper from "./helper";
 
 export default function Portal(){
 
@@ -17,7 +17,7 @@ export default function Portal(){
             rounded-lg drop-shadow-[0_0_2px_var(--lloyds-dark-green)] flex flex-col">
                     <div className="w-full h-[60px] flex items-center justify-center font-bold text-lg border-b-[1px] border-[var(--lloyds-dark-green)]/40">
                         <p>Mortgage Calculator</p>
-
+                        <Helper title={"Mortgage Calculator"} description={"This is a mortgage calculator to help you estimate your monthly payments."}/>
                     </div>
 
                     <div className="w-full h-[480px] flex flex-col bg-[var(--lloyds-grey-subtle)] border-b-[1px] border-[var(--lloyds-dark-green)]/40">
