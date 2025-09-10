@@ -24,8 +24,19 @@ export default function Portal(){
     const updater = (newPage, pageUnlocked) => {
         setCurPage(newPage);
         setPagesUnlocked(pagesUnlocked.push(pageUnlocked));
+        checkPages();
+    }
 
-        console.log(pagesUnlocked);
+    //function to automatically asynchronously unlock more pagination pages
+    async function checkPages(){
+        let lengthOfPagesUnlocked = pagesUnlocked.length;
+        try{
+            document.getElementById(`pagination_${lengthOfPagesUnlocked}`).disabled = false; //undisable the navigation per access of page
+            console.log(lengthOfPagesUnlocked);
+        }
+        catch{
+
+        }
     }
 
     return(
@@ -56,10 +67,10 @@ export default function Portal(){
                                     ➤
                             </button>
 
-                            <select id="pagination_dropdown" value="1" className="bg-transparent text-md ml-2 mr-2">
-                                <option value="1">Page 1 / 3</option>
-                                <option value="2">Page 2 / 3</option>
-                                <option value="3">Page 3 / 3</option>
+                            <select id="pagination_dropdown" defaultValue="1" className="bg-transparent text-md ml-2 mr-2">
+                                <option id="pagination_1" value="1">Page 1 / 3</option>
+                                <option id="pagination_2" value="2" disabled={true}>Page 2 / 3</option>
+                                <option id="pagination_3" value="3" disabled={true}>Page 3 / 3</option>
                             </select>
 
                             <button onClick={() => {}} className="w-[30px] h-[30px] rounded-md bg-[var(--lloyds-light-grey)]
