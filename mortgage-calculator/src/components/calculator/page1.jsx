@@ -29,6 +29,10 @@ export default function Page1({functionToUpdate}){
             if(sessionStorage.getItem("mortgageTerms")){
                 setMortgageTerms(sessionStorage.getItem("mortgageTerms"));
             }
+
+            if(sessionStorage.getItem("loanAmount")){
+                setLoanValue(sessionStorage.getItem("loanAmount"));
+            }
         }
         catch{
 
@@ -66,6 +70,11 @@ export default function Page1({functionToUpdate}){
         
     }
 
+    const updateLoanAmount = (newVal) => {
+        setLoanValue(Number(newVal));
+        sessionStorage.setItem("loanAmount", newVal);
+    }
+
     const updatePage = () => { //send props function new values
         try{
             functionToUpdate("MortgageTypes", "MortgageTypes");
@@ -97,9 +106,9 @@ export default function Page1({functionToUpdate}){
             <Input type="text" label="Your Deposit (£):" placeholder="Enter Deposit Amount (£)"
             classExtensions={"mt-6 flex justify-center sm:-ml-1"} onChange={updateDepositValue} value={depositAmount}></Input>
 
-            <Input type="text" label={`Loan Value${loanValue > 0 && canEditLoan == false ? `: £${loanValue}` : " (£):"}`} placeholder="Enter Loaning Amount (£)"
-            classExtensions={"mt-6 flex justify-center sm:-ml-1"} 
-            onChange={() => {}} value={loanValue > 0 ? loanValue : null} 
+            <Input type="text" label={`Loan Amount${loanValue > 0 && canEditLoan == false ? `: £${loanValue}` : " (£):"}`} placeholder="Enter Loaning Amount (£)"
+            classExtensions={"mt-6 flex justify-center sm:-ml-1"}
+            onChange={updateLoanAmount} value={loanValue > 0 ? loanValue : null} 
             isHidden={!canEditLoan} updateHidden={setCanEditLoan}></Input>
 
             <Slider label="Mortgage Terms:" 
