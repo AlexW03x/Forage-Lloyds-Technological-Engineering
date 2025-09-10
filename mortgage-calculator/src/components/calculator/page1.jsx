@@ -109,7 +109,8 @@ export default function Page1({functionToUpdate}){
             <Input type="text" label={`Loan Amount${loanValue > 0 && canEditLoan == false ? `: £${loanValue}` : " (£):"}`} placeholder="Enter Loaning Amount (£)"
             classExtensions={"mt-6 flex justify-center sm:-ml-1"}
             onChange={updateLoanAmount} value={loanValue > 0 ? loanValue : null} 
-            isHidden={!canEditLoan} updateHidden={setCanEditLoan}></Input>
+            isHidden={!canEditLoan} updateHidden={setCanEditLoan}
+            helper={{active: true, title: "Loaning from us", tooltip: "The amount of money you would ideally like to borrow from Lloyds Bank."}}></Input>
 
             <Slider label="Mortgage Terms:" 
             values={{min: 1, max: 40, default: 25}} value={mortgageTerms}

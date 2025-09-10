@@ -6,8 +6,15 @@ import Helper from "./helper";
 //@params placeholder == String: placeholder text for label
 //@params onChange == Void: function to update e.target.value
 //@params classExtensions == String: add more classNames to div container
+//@params value == Number/String: pass variables from other component to update value of input
+//@params isHidden == Boolean: show the input or instead an edit icon for auto adjusters
+//@params updateHidden == Void: function to update another component variables
+//@params helper = Dict: active for showing help button, tooltip for description of input
 export default function Input(
-    {type, label, placeholder, onChange=null, classExtensions=null, value=null, isHidden=false, updateHidden=null}
+    {type, label, placeholder, 
+        onChange=null, classExtensions=null, 
+        value=null, isHidden=false, 
+        updateHidden=null, helper = {active: false, title: null, tooltip: null}}
 ){
 
     const [hidden, setHidden] = useState(isHidden); //toggleable hidden with defaulting from props
@@ -23,7 +30,7 @@ export default function Input(
             updateHidden(true); //for the can edit variable so we can update label
         }
         catch{
-            
+
         }
     }
 
@@ -38,8 +45,12 @@ export default function Input(
                 }
                 {hidden == true && 
                     <p className="text-md text-[var(--lloyds-blue)] font-semibold cursor-pointer 
-                        underline-offset-2 underline-[1px] decoration-[var(--lloyds-blue)] hover:opacity-80"
+                        underline-offset-2 underline-[1px] decoration-[var(--lloyds-blue)] hover:opacity-80 w-[100%] sm:max-w-[300px]"
                         onClick={show}>Edit?</p>}
+
+                {helper.active == true && <Helper title={helper.title} description={helper.tooltip} 
+                classExtensions={`absolute ${hidden==true?"-mt-[35px]":"-mt-12"} right-2 sm:mt-0 lg:right-36 sm:right-24 text-[var(--lloyds-blue)]`}
+                customPos={"-ml-56 min-w-[250px] mt-2"}/>}
             </div>
         </>
     )

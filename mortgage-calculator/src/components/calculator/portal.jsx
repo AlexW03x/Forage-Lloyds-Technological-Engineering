@@ -32,7 +32,8 @@ export default function Portal(){
             rounded-lg drop-shadow-[0_0_2px_var(--lloyds-dark-green)] flex flex-col">
                     <div className="w-full h-[60px] flex items-center justify-center font-bold text-lg border-b-[1px] border-[var(--lloyds-dark-green)]/40">
                         <p>Mortgage Calculator</p>
-                        <Helper title={texts.Calculator.title} description={texts.Calculator.description} classExtensions={"text-[var(--lloyds-blue)]"}/>
+                        <Helper title={texts.Calculator.title} description={texts.Calculator.description} classExtensions={"text-[var(--lloyds-blue)]"}
+                        customPos={"left-5 sm:left-auto sm:right-40 mt-2"}/>
                     </div>
 
                     <div className="w-full min-h-[480px] pb-[20px] flex flex-col bg-[var(--lloyds-grey-subtle)] border-b-[1px] border-[var(--lloyds-dark-green)]/40 py-4">
@@ -54,8 +55,9 @@ export default function Portal(){
                             </button>
 
                             <select id="pagination_dropdown" value="1" className="bg-transparent text-md ml-2 mr-2">
-                                <option value="1">Page 1 / 2</option>
-                                <option value="2">Page 2 / 2</option>
+                                <option value="1">Page 1 / 3</option>
+                                <option value="2">Page 2 / 3</option>
+                                <option value="3">Page 3 / 3</option>
                             </select>
 
                             <button onClick={() => {}} className="w-[30px] h-[30px] rounded-md bg-[var(--lloyds-light-grey)]
