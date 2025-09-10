@@ -23,7 +23,12 @@ export default function Portal(){
     //function to update curPage and unlockedPages
     const updater = (newPage, pageUnlocked) => {
         setCurPage(newPage);
-        setPagesUnlocked(pagesUnlocked.push(pageUnlocked));
+        if(pageUnlocked in pagesUnlocked){
+            //ignore if page already exists
+        }
+        else{
+            setPagesUnlocked(pagesUnlocked.push(pageUnlocked)); //push new page to array of existing pages unlocked
+        }
         checkPages();
     }
 
@@ -68,9 +73,10 @@ export default function Portal(){
                             </button>
 
                             <select id="pagination_dropdown" defaultValue="1" className="bg-transparent text-md ml-2 mr-2">
-                                <option id="pagination_1" value="1">Page 1 / 3</option>
-                                <option id="pagination_2" value="2" disabled={true}>Page 2 / 3</option>
-                                <option id="pagination_3" value="3" disabled={true}>Page 3 / 3</option>
+                                <option id="pagination_1" value="1">Page 1 / 4</option>
+                                <option id="pagination_2" value="2" disabled={true}>Page 2 / 4</option>
+                                <option id="pagination_3" value="3" disabled={true}>Page 3 / 4</option>
+                                <option id="pagination_4" value="4" disabled={true}>Page 4 / 4</option>
                             </select>
 
                             <button onClick={() => {}} className="w-[30px] h-[30px] rounded-md bg-[var(--lloyds-light-grey)]
