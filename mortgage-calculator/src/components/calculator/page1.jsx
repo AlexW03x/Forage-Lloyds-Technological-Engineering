@@ -101,7 +101,7 @@ export default function Page1({functionToUpdate}){
             <Notice logo={texts.Calculator_Notice.logo} description={texts.Calculator_Notice.description}/>
 
             <Input type="text" label="Property Value (£):" placeholder="Enter Property Value (£)" 
-            classExtensions={"mt-8 sm:mt-16 flex justify-center sm:-ml-1"} onChange={updatePropertyValue} value={propertyValue}></Input>
+            classExtensions={"mt-8 flex justify-center sm:-ml-1"} onChange={updatePropertyValue} value={propertyValue}></Input>
 
             <Input type="text" label="Your Deposit (£):" placeholder="Enter Deposit Amount (£)"
             classExtensions={"mt-6 flex justify-center sm:-ml-1"} onChange={updateDepositValue} value={depositAmount}></Input>

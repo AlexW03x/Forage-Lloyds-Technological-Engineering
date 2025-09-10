@@ -28,14 +28,14 @@ export default function Portal(){
 
     return(
         <>
-            <div className="max-w-[800px] w-[90%] h-[600px] mx-auto mt-[60px] bg-[var(--lloyds-grey)] 
+            <div className="max-w-[800px] w-[90%] min-h-[600px] mx-auto mt-[60px] bg-[var(--lloyds-grey)] 
             rounded-lg drop-shadow-[0_0_2px_var(--lloyds-dark-green)] flex flex-col">
                     <div className="w-full h-[60px] flex items-center justify-center font-bold text-lg border-b-[1px] border-[var(--lloyds-dark-green)]/40">
                         <p>Mortgage Calculator</p>
                         <Helper title={texts.Calculator.title} description={texts.Calculator.description} classExtensions={"text-[var(--lloyds-blue)]"}/>
                     </div>
 
-                    <div className="w-full h-[480px] flex flex-col bg-[var(--lloyds-grey-subtle)] border-b-[1px] border-[var(--lloyds-dark-green)]/40 py-4">
+                    <div className="w-full min-h-[480px] pb-[20px] flex flex-col bg-[var(--lloyds-grey-subtle)] border-b-[1px] border-[var(--lloyds-dark-green)]/40 py-4">
                         {/* Calculator content will go here */}
 
                         {curPage == "Beginning" && <Page1 functionToUpdate={updater}/>}
