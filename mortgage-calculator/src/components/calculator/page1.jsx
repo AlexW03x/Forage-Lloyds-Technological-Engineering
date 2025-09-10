@@ -97,8 +97,10 @@ export default function Page1({functionToUpdate}){
             <Input type="text" label="Your Deposit (£):" placeholder="Enter Deposit Amount (£)"
             classExtensions={"mt-6 flex justify-center sm:-ml-1"} onChange={updateDepositValue} value={depositAmount}></Input>
 
-            <Input type="text" label={`Loan Value (£): ${loanValue}`} placeholder="Enter Loaning Amount (£)"
-            classExtensions={"mt-6 flex justify-center sm:-ml-1"} onChange={() => {}} value={null} isHidden={!canEditLoan}></Input>
+            <Input type="text" label={`Loan Value${loanValue > 0 && canEditLoan == false ? `: £${loanValue}` : " (£):"}`} placeholder="Enter Loaning Amount (£)"
+            classExtensions={"mt-6 flex justify-center sm:-ml-1"} 
+            onChange={() => {}} value={loanValue > 0 ? loanValue : null} 
+            isHidden={!canEditLoan} updateHidden={setCanEditLoan}></Input>
 
             <Slider label="Mortgage Terms:" 
             values={{min: 1, max: 40, default: 25}} value={mortgageTerms}
