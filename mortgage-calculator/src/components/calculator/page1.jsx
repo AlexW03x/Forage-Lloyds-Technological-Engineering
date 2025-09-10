@@ -12,6 +12,9 @@ export default function Page1({functionToUpdate}){
     const [loanValue, setLoanValue] = useState("");
     const [canEditLoan, setCanEditLoan] = useState(false); //for hidden input
 
+    //error message for not filling all info
+    const [error, setError] = useState("");
+
     // onload function
     window.onload = async function(){
         console.log("Portal Loaded");
@@ -77,6 +80,21 @@ export default function Page1({functionToUpdate}){
 
     const updatePage = () => { //send props function new values
         try{
+            if(propertyValue == "" || propertyValue == null){
+                setError("Error: Enter Property Value!");
+                return;
+            }
+
+            if(depositAmount == "" || depositAmount == null){
+                setError("Error: Enter Deposit Amount!");
+                return;
+            }
+            
+            if(loanValue == "" || loanValue == null){
+                setError("Error: Provide Loan Value!");
+                return;
+            }
+
             functionToUpdate("MortgageTypes", "MortgageTypes");
         }
         catch{
@@ -100,6 +118,8 @@ export default function Page1({functionToUpdate}){
         <>
             <Notice logo={texts.Calculator_Notice.logo} description={texts.Calculator_Notice.description}/>
 
+            {error != "" && <p className="font-semibold text-[var(--lloyds-red)] text-center mx-2 mt-4 -mb-3">{error}</p>}
+
             <Input type="text" label="Property Value (£):" placeholder="Enter Property Value (£)" 
             classExtensions={"mt-8 flex justify-center sm:-ml-1"} onChange={updatePropertyValue} value={propertyValue}></Input>
 
@@ -110,14 +130,15 @@ export default function Page1({functionToUpdate}){
             classExtensions={"mt-6 flex justify-center sm:-ml-1"}
             onChange={updateLoanAmount} value={loanValue > 0 ? loanValue : null} 
             isHidden={!canEditLoan} updateHidden={setCanEditLoan}
-            helper={{active: true, title: "Loaning from us", tooltip: "The amount of money you would ideally like to borrow from Lloyds Bank."}}></Input>
+            helper={{active: true, title: "Loaning from us", 
+            tooltip: "The amount of money you would ideally like to borrow from Lloyds Bank. Automatically calculated by default!"}}></Input>
 
             <Slider label="Mortgage Terms:" 
             values={{min: 1, max: 40, default: 25}} value={mortgageTerms}
             classExtensions={"mt-6 flex sm:justify-center sm:-ml-1"} onChange={updateMortgageTerms}></Slider>
 
 
-            <button className="w-[200px] h-[40px] rounded-md text-[var(--lloyds-white)]
+            <button onClick={updatePage} className="w-[200px] h-[40px] rounded-md text-[var(--lloyds-white)]
                 font-semibold bg-[var(--lloyds-dark-green)] mt-10 hover:opacity-70 focus:opacity-70
                 drop-shadow-[0_0_1px_black] mx-auto sm:translate-x-28">Next Page</button>
         </>

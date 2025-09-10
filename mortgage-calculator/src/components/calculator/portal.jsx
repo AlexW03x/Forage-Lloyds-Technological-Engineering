@@ -23,7 +23,9 @@ export default function Portal(){
     //function to update curPage and unlockedPages
     const updater = (newPage, pageUnlocked) => {
         setCurPage(newPage);
-        setPagesUnlocked(pageUnlocked);
+        setPagesUnlocked(pagesUnlocked.push(pageUnlocked));
+
+        console.log(pagesUnlocked);
     }
 
     return(
