@@ -7,6 +7,9 @@ import Notice from "./calculator/notice";
 import Input from "./calculator/input";
 import Slider from "./calculator/slider";
 
+//portal components
+import Page1 from "./calculator/page1";
+
 export {
     NavigationContext,
     Navigation,
@@ -18,4 +21,5 @@ export {
     Notice,
     Input,
     Slider,
+    Page1,
 }
