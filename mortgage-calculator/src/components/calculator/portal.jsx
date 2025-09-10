@@ -27,7 +27,7 @@ export default function Portal(){
             //ignore if page already exists
         }
         else{
-            setPagesUnlocked(pagesUnlocked.push(pageUnlocked)); //push new page to array of existing pages unlocked
+            pagesUnlocked.push(pageUnlocked); //update the array
         }
         checkPages();
     }
@@ -37,10 +37,23 @@ export default function Portal(){
         let lengthOfPagesUnlocked = pagesUnlocked.length;
         try{
             document.getElementById(`pagination_${lengthOfPagesUnlocked}`).disabled = false; //undisable the navigation per access of page
-            console.log(lengthOfPagesUnlocked);
+            document.getElementById("pagination_dropdown").value = lengthOfPagesUnlocked; //update to new page
+            console.log(pagesUnlocked); //debug
         }
         catch{
 
+        }
+    }
+
+    function changePage(){
+        try{
+            let page = document.getElementById("pagination_dropdown").value;
+            console.log(page);
+            console.log(pagesUnlocked[0])
+            
+        }
+        catch{
+            console.error("Cannot switch page due to error!");
         }
     }
 
@@ -72,7 +85,8 @@ export default function Portal(){
                                     ➤
                             </button>
 
-                            <select id="pagination_dropdown" defaultValue="1" className="bg-transparent text-md ml-2 mr-2">
+                            <select id="pagination_dropdown" defaultValue="1" className="bg-transparent text-md ml-2 mr-2"
+                            onChange={changePage}>
                                 <option id="pagination_1" value="1">Page 1 / 4</option>
                                 <option id="pagination_2" value="2" disabled={true}>Page 2 / 4</option>
                                 <option id="pagination_3" value="3" disabled={true}>Page 3 / 4</option>
