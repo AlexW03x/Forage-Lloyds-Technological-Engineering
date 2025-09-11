@@ -23,22 +23,21 @@ export default function Portal(){
     //function to update curPage and unlockedPages
     const updater = (newPage, pageUnlocked) => {
         setCurPage(newPage);
-        if(pageUnlocked in pagesUnlocked){
-            //ignore if page already exists
-        }
-        else{
+        if(!pagesUnlocked.includes(pageUnlocked)){
             pagesUnlocked.push(pageUnlocked); //update the array
         }
+        
         checkPages();
     }
 
     //function to automatically asynchronously unlock more pagination pages
     async function checkPages(){
         let lengthOfPagesUnlocked = pagesUnlocked.length;
+        console.log(lengthOfPagesUnlocked);
         try{
             document.getElementById(`pagination_${lengthOfPagesUnlocked}`).disabled = false; //undisable the navigation per access of page
             document.getElementById("pagination_dropdown").value = lengthOfPagesUnlocked; //update to new page
-            console.log(pagesUnlocked); //debug
+            //console.log(pagesUnlocked); //debug
         }
         catch{
 
