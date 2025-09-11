@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { CheckMark, CrossMark, Info, Exclamation} from "../../assets";
+import React, {ReactNode} from "react";
 
-export default function Notice({logo, description}){
+export default function Notice({logo, description, childrenNodes = ReactNode}){
 
     const [noticeLogo, setNoticeLogo] = useState(logo);
     const [noticeLogoAlt, setNoticeLogoAlt] = useState("Notice Logo");
@@ -40,7 +41,7 @@ export default function Notice({logo, description}){
                 </div>
 
                 <div className="w-full min-h-[50px] h-auto px-2 flex flex-col justify-center">
-                    <p className="text-[var(--lloyds-black)] text-md font-semibold whitespace-pre-line">{description}</p>
+                    <p className="text-[var(--lloyds-black)] text-md font-semibold whitespace-pre-line">{description}{childrenNodes}</p>
                 </div>
 
             </div>
