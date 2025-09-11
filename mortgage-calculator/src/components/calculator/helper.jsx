@@ -8,10 +8,11 @@ export default function Helper({title, description, classExtensions=null, custom
         setShowHelp(bool);
     }
 
+
     return(
         <>
             <p
-             className={`ml-2 text-3xl font-[400] ${classExtensions}`}><span onClick={() => {toggleHelp(!showHelp)}} className={`cursor-pointer`}>ⓘ</span>
+             className={`ml-2 text-3xl font-[400] ${classExtensions}`}><span onClick={() => {setShowHelp(!showHelp)}} className={`cursor-pointer`}>ⓘ</span>
 
                 <span
                 className={`${showHelp ? "block" : "hidden"} w-[90%] sm:w-[300px] ${customPos}  
@@ -20,7 +21,7 @@ export default function Helper({title, description, classExtensions=null, custom
 
                     <strong>
                         {title}
-                        <span className="float-end cursor-pointer hover:opacity-70 text-xl -mt-1" onClick={() => {toggleHelp(false)}}>✗</span>
+                        <span className="float-end cursor-pointer hover:opacity-70 text-xl -mt-1" onClick={() => {setShowHelp(false)}}>✗</span>
                     </strong>
                     <br/><br/>
                     {description}

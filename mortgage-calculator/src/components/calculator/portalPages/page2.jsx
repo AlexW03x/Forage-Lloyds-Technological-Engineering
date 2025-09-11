@@ -49,7 +49,21 @@ export default function Page2(
 
             <InterestButton icon={FixedRate} text="Fixed Interest Rate" 
             helper={{active: true, title:"Fixed Interest Rate", 
-                tooltip: "", 
+                tooltip: "A fixed-rate mortgage means your interest rate and monthly payments stay the same for the whole term of the loan. This gives you certainty and makes it easier to budget, since your payments won’t go up even if market rates rise.", 
+                classExtension: "text-[var(--lloyds-blue)]",
+                customPos: "left-5 sm:left-auto mt-1 sm:right-2"
+            }}></InterestButton>
+
+            <InterestButton icon={AdjustableRate} text="Adjustable Interest Rate" 
+            helper={{active: true, title:"Adjustable Rate", 
+                tooltip: "An adjustable-rate mortgage starts with a fixed interest rate for a set period, then the rate can go up or down based on market conditions. This usually means lower payments at first, but your monthly costs may change over time.", 
+                classExtension: "text-[var(--lloyds-blue)]",
+                customPos: "left-5 sm:left-auto mt-1 sm:right-2"
+            }}></InterestButton>
+
+            <InterestButton icon={InterestOnly} text="Interest Only"
+            helper={{active: true, title:"Fixed Interest Rate", 
+                tooltip: "With an interest-only mortgage, you only pay the interest for a set period, so your monthly payments are lower at first. After that, you’ll start paying both interest and the loan amount, which means your payments will go up.", 
                 classExtension: "text-[var(--lloyds-blue)]",
                 customPos: "left-5 sm:left-auto mt-1 sm:right-2"
             }}></InterestButton>

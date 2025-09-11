@@ -16,11 +16,10 @@ export default function InterestButton(
     return(
         <>
         <button className={`w-[95%] rounded-lg min-h-[50px] h-auto ${classExtension} bg-[var(--lloyds-grey)] mx-auto mt-4 
-        drop-shadow-[0_0_1px_var(--lloyds-black)] 
-        hover:drop-shadow-[0_0_2px_var(--lloyds-dark-green)] focus:drop-shadow-[0_0_2px_var(--lloyds-green)]
-         flex flex-row items-center cursor-default outline-none`}>
+         border-[1px] border-black/20 hover:border-[var(--lloyds-dark-green)] focus:border-[var(--lloyds-dark-green)]
+         flex flex-row items-center cursor-default outline-none pr-2 sm:pr-0 `}>
 
-            <div className="flex flex-row items-center cursor-pointer min-w-max w-[90%] min-h-[50px] h-auto">
+            <div className="flex flex-row items-center cursor-pointer min-w-max w-[90%] min-h-[50px] h-auto sm:mr-4 ">
                 {icon != null && 
                     <img src={icon} alt="Button Icon" draggable="false" className="object-contain w-[30px] h-[30px] mx-4"></img>
                 }
@@ -28,12 +27,10 @@ export default function InterestButton(
                 <span className="font-semibold">{text}</span>
             </div>
 
-            <div className="flex flex-grow justify-end mr-4">
-                {helper.active == true && 
-                    <Helper title={helper.title} description={helper.tooltip} 
-                        classExtensions={helper.classExtension} customPos={helper.customPos}></Helper>
-                }
-            </div>
+            {helper.active == true && 
+                <Helper title={helper.title} description={helper.tooltip} 
+                    classExtensions={helper.classExtension} customPos={helper.customPos}></Helper>
+            }
         </button>
         </>
     )
