@@ -4,6 +4,8 @@ import Helper from "../helper";
 import Input from "../input";
 import InterestButton from "../interestButton";
 
+import { FixedRate, AdjustableRate, InterestOnly } from "../../../assets";
+
 //This page is utilised for selecting the type of mortgage they are going to calculate.
 
 export default function Page2(
@@ -28,7 +30,7 @@ export default function Page2(
 
             setInformation(`Please select the mortgage type you would like to calculate!`);
             setPrevInput(
-                `Property Value: £${propertyValue} 🔹 Deposit Amount: £${depositAmount} 🔹 Loan Value: £${loanValue} 🔹 Terms: ${mortgageTerms} Years`
+                `Property Value: £${propertyValue} 🔹 Depositing: £${depositAmount} 🔹 Loaning: £${loanValue} 🔹 Terms: ${mortgageTerms} Years`
             )
         }
         catch{
@@ -45,7 +47,7 @@ export default function Page2(
                 </p>
             }></Notice>
 
-            <InterestButton></InterestButton>
+            <InterestButton icon={FixedRate}></InterestButton>
         </>
     )
 }

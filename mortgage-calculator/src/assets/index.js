@@ -7,6 +7,9 @@ import CheckMark from "./check-mark.webp";
 import Exclamation from "./exclamation.webp";
 import Info from "./info.webp";
 import CrossMark from "./x-mark.webp";
+import AdjustableRate from "./adjustable.webp";
+import InterestOnly from "./interest-rate.webp";
+import FixedRate from "./lock.webp";
 
 export{
     Logo,
@@ -18,4 +21,7 @@ export{
     Exclamation,
     Info,
     CrossMark,
+    AdjustableRate,
+    InterestOnly,
+    FixedRate,
 }
