@@ -39,7 +39,7 @@ export default function Page2(
         <>
             <Notice logo="info" description={information} childrenNodes={
                 <p className="text-[var(--lloyds-blue)] text-sm">
-                    <span class="text-[var(--lloyds-black)]">Your current inputs:</span>
+                    <span className="text-[var(--lloyds-black)]">Your current inputs:</span>
                     <br/>{prevInput}
                 </p>
             }></Notice>

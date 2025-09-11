@@ -61,6 +61,30 @@ export default function Portal(){
         }
     }
 
+    function paginationScroll(movement){ //for the pagination buttons to scroll pages
+        let page = document.getElementById("pagination_dropdown").value;
+        let unlockedPages = pagesUnlocked.length;
+        if(movement == "left"){
+            if(page != 1){
+                setCurPage(pagesUnlocked[page-1-1]);
+                document.getElementById("pagination_dropdown").value = page - 1;
+            }
+        }
+        else if(movement == "right"){
+            if(page != unlockedPages){
+                //calculate difference of page numbers
+                let diff = unlockedPages - page;
+                //console.log(Number(page) + Number(diff)); //debug
+
+                setCurPage(pagesUnlocked[Number(page) + Number(diff) - 1]);
+                document.getElementById("pagination_dropdown").value = Number(page) + Number(diff);
+            }
+        }
+        else{
+            console.error("Error at paginationScroll(): Invalid Scroll Option!"); //for incorrect input
+        }
+    }
+
     return(
         <>
             <div className="max-w-[800px] w-[90%] min-h-[600px] mx-auto mt-[60px] bg-[var(--lloyds-grey)] 
@@ -84,7 +108,7 @@ export default function Portal(){
                         </p>
 
                         <div className="" id="pagination">
-                            <button onClick={() => {}} className="w-[30px] h-[30px] rounded-md bg-[var(--lloyds-light-grey)]
+                            <button onClick={() => {paginationScroll("left")}} className="w-[30px] h-[30px] rounded-md bg-[var(--lloyds-light-grey)]
                                   hover:bg-black/20 defaultTransition rotate-180">
                                     ➤
                             </button>
@@ -97,7 +121,7 @@ export default function Portal(){
                                 <option id="pagination_4" value="4" disabled={true}>Page 4 / 4</option>
                             </select>
 
-                            <button onClick={() => {}} className="w-[30px] h-[30px] rounded-md bg-[var(--lloyds-light-grey)]
+                            <button onClick={() => {paginationScroll("right")}} className="w-[30px] h-[30px] rounded-md bg-[var(--lloyds-light-grey)]
                                  hover:bg-black/20 defaultTransition">
                                     ➤
                             </button>

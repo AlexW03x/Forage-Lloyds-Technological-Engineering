@@ -41,7 +41,8 @@ export default function Notice({logo, description, childrenNodes = ReactNode}){
                 </div>
 
                 <div className="w-full min-h-[50px] h-auto px-2 flex flex-col justify-center">
-                    <p className="text-[var(--lloyds-black)] text-md font-semibold whitespace-pre-line">{description}{childrenNodes}</p>
+                    <p className="text-[var(--lloyds-black)] text-md font-semibold whitespace-pre-line">{description}</p>
+                    {childrenNodes}
                 </div>
 
             </div>
