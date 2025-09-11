@@ -11,8 +11,19 @@ export default function InterestButton(
     {icon, text, 
         helper={active: false, title: null, tooltip: null, classExtension: null, customPos: null},
         classExtension = null,
+        onClick=null
     }
 ){
+
+    const executeOnClick = () => {
+        try{
+            if(onClick!=null) onClick();
+        }
+        catch{
+            console.error("Function could not be executed at <InterestButton>");
+        }
+    }
+
     return(
         <>
         <button className={`w-[95%] rounded-lg min-h-[50px] h-auto ${classExtension} bg-[var(--lloyds-grey)] mx-auto mt-4 

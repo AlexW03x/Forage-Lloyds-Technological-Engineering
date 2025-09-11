@@ -36,7 +36,12 @@ export default function Page2(
         catch{
 
         }
-    })
+    });
+
+    //update next step for the user
+    const doNextUpdate = (value) => {
+
+    }
 
     return(
         <>
@@ -46,6 +51,8 @@ export default function Page2(
                     <br/>{prevInput}
                 </p>
             }></Notice>
+
+            <p className="mx-4 text-center font-semibold mt-5">Select Mortgage Type</p>
 
             <InterestButton icon={FixedRate} text="Fixed Interest Rate" 
             helper={{active: true, title:"Fixed Interest Rate", 
@@ -62,7 +69,7 @@ export default function Page2(
             }}></InterestButton>
 
             <InterestButton icon={InterestOnly} text="Interest Only"
-            helper={{active: true, title:"Fixed Interest Rate", 
+            helper={{active: true, title:"Interest Only", 
                 tooltip: "With an interest-only mortgage, you only pay the interest for a set period, so your monthly payments are lower at first. After that, you’ll start paying both interest and the loan amount, which means your payments will go up.", 
                 classExtension: "text-[var(--lloyds-blue)]",
                 customPos: "left-5 sm:left-auto mt-1 sm:right-2"
