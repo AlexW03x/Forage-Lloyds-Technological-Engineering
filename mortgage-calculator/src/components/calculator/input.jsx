@@ -10,11 +10,13 @@ import Helper from "./helper";
 //@params isHidden == Boolean: show the input or instead an edit icon for auto adjusters
 //@params updateHidden == Void: function to update another component variables
 //@params helper = Dict: active for showing help button, tooltip for description of input
+//@params error = Bool: true for highlighting everything in red if there is an error
 export default function Input(
     {type, label, placeholder, 
         onChange=null, classExtensions=null, 
         value=null, isHidden=false, 
-        updateHidden=null, helper = {active: false, title: null, tooltip: null}}
+        updateHidden=null, helper = {active: false, title: null, tooltip: null},
+    error = null}
 ){
 
     const [hidden, setHidden] = useState(isHidden); //toggleable hidden with defaulting from props
@@ -37,10 +39,11 @@ export default function Input(
     return(
         <>
             <div className={`w-[95%] mx-auto flex flex-col sm:flex-row gap-2 sm:gap-4 text-[var(--lloyds-black)] sm:items-center ${classExtensions}`}>
-                <p className="font-semibold text-md sm:w-[150px] sm:text-right">{label}</p>
+                <p className={`font-semibold text-md sm:w-[150px] sm:text-right ${error==true&&"text-[var(--lloyds-red)]"}`}>{label}</p>
                 {hidden == false && 
                     <input type={type} value={value} placeholder={placeholder} onChange={(e) => {updateValues(e.target.value)}}
-                    className="rounded-md h-[40px] sm:max-w-[300px] w-[100%] px-2 outline-none drop-shadow-[0_0_1px_black] focus:drop-shadow-[0_0_2px_green]">
+                    className={`rounded-md h-[40px] sm:max-w-[300px] w-[100%] px-2 outline-none 
+                    ${error == true ? "drop-shadow-[0_0_1px_red]" : "drop-shadow-[0_0_1px_black]"} focus:drop-shadow-[0_0_2px_green]`}>
                     </input>
                 }
                 {hidden == true && 

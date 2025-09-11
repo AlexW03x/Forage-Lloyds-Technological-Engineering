@@ -14,6 +14,7 @@ export default function Page1({functionToUpdate}){
 
     //error message for not filling all info
     const [error, setError] = useState("");
+    const [errorArea, setErrorArea] = useState(""); //property value, deposit amount, etc makes input red for incomplete!
 
     // onload function
     useEffect(() => {
@@ -83,19 +84,29 @@ export default function Page1({functionToUpdate}){
         try{
             if(propertyValue == "" || propertyValue == null){
                 setError("Error: Enter Property Value!");
+                setErrorArea("propertyValue");
                 return;
             }
 
             if(depositAmount == "" || depositAmount == null){
                 setError("Error: Enter Deposit Amount!");
+                setErrorArea("depositAmount");
                 return;
             }
             
             if(loanValue == "" || loanValue == null){
                 setError("Error: Provide Loan Value!");
+                setErrorArea("loanValue");
                 return;
             }
 
+            if(propertyValue < depositAmount){
+                setError("Deposit is larger than property value!");
+                setErrorArea("depositAmount");
+            }
+
+            setError("");
+            setErrorArea(""); //clear errors
             functionToUpdate("MortgageTypes", "MortgageTypes");
         }
         catch{
@@ -122,17 +133,20 @@ export default function Page1({functionToUpdate}){
             {error != "" && <p className="font-semibold text-[var(--lloyds-red)] text-center mx-2 mt-4 -mb-3">{error}</p>}
 
             <Input type="text" label="Property Value (£):" placeholder="Enter Property Value (£)" 
-            classExtensions={"mt-8 flex justify-center sm:-ml-1"} onChange={updatePropertyValue} value={propertyValue}></Input>
+            classExtensions={"mt-8 flex justify-center sm:-ml-1"} onChange={updatePropertyValue} value={propertyValue}
+            error={errorArea=="propertyValue"?true:false}></Input>
 
             <Input type="text" label="Your Deposit (£):" placeholder="Enter Deposit Amount (£)"
-            classExtensions={"mt-6 flex justify-center sm:-ml-1"} onChange={updateDepositValue} value={depositAmount}></Input>
+            classExtensions={"mt-6 flex justify-center sm:-ml-1"} onChange={updateDepositValue} value={depositAmount}
+            error={errorArea=="depositAmount"?true:false}></Input>
 
             <Input type="text" label={`Loan Amount${loanValue > 0 && canEditLoan == false ? `: £${loanValue}` : " (£):"}`} placeholder="Enter Loaning Amount (£)"
             classExtensions={"mt-6 flex justify-center sm:-ml-1"}
             onChange={updateLoanAmount} value={loanValue > 0 ? loanValue : null} 
             isHidden={!canEditLoan} updateHidden={setCanEditLoan}
             helper={{active: true, title: "Loaning from us", 
-            tooltip: "The amount of money you would ideally like to borrow from Lloyds Bank. Automatically calculated by default!"}}></Input>
+            tooltip: "The amount of money you would ideally like to borrow from Lloyds Bank. Automatically calculated by default!"}}
+            error={errorArea=="loanValue"?true:false}></Input>
 
             <Slider label="Mortgage Terms:" 
             values={{min: 1, max: 40, default: 25}} value={mortgageTerms}
