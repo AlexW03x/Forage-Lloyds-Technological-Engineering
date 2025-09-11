@@ -16,7 +16,7 @@ export default function Page1({functionToUpdate}){
     const [error, setError] = useState("");
 
     // onload function
-    window.onload = async function(){
+    useEffect(() => {
         console.log("Portal Loaded");
 
         //fetch user history if exists
@@ -40,7 +40,8 @@ export default function Page1({functionToUpdate}){
         catch{
 
         }
-    }
+    },[]);
+
 
     //for updating loan value based on parameters
     useEffect(() => {

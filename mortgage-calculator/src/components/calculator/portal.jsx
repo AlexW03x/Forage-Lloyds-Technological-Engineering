@@ -48,8 +48,8 @@ export default function Portal(){
     function changePage(){
         try{
             let page = document.getElementById("pagination_dropdown").value;
-            console.log(page);
-            console.log(pagesUnlocked[0])
+            console.log(pagesUnlocked);
+            setCurPage(pagesUnlocked[page-1]); //change page to page dropdown index
             
         }
         catch{
