@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Notice from "./notice";
-import Input from "./input";
-import Slider from "./slider";
+import Notice from "../notice";
+import Input from "../input";
+import Slider from "../slider";
 
 export default function Page1({functionToUpdate}){
 

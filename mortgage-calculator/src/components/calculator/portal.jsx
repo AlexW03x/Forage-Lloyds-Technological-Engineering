@@ -1,11 +1,16 @@
 
 import { useEffect, useState } from "react";
+
+//component imports
 import Helper from "./helper";
 import Notice from "./notice";
 import Input from "./input";
 import { Lock } from "../../assets";
 import Slider from "./slider";
-import Page1 from "./page1";
+
+//page imports for portal
+import Page1 from "./portalPages/page1";
+import Page2 from "./portalPages/page2";
 
 export default function Portal(){
 
@@ -70,7 +75,7 @@ export default function Portal(){
                         {/* Calculator content will go here */}
 
                         {curPage == "Beginning" && <Page1 functionToUpdate={updater}/>}
-                        
+                        {curPage == "MortgageTypes" && <Page2/>}
                     </div>
 
                     <div className="w-full h-[60px] flex flex-row items-center justify-center font-semibold">

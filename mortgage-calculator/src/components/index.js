@@ -8,7 +8,7 @@ import Input from "./calculator/input";
 import Slider from "./calculator/slider";
 
 //portal components
-import Page1 from "./calculator/page1";
+import Page1 from "./calculator/portalPages/page1";
 
 export {
     NavigationContext,
