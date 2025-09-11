@@ -107,6 +107,8 @@ export default function Page1({functionToUpdate}){
 
             setError("");
             setErrorArea(""); //clear errors
+            //to ensure that if terms arent changed store anyways into sessionStorage
+            sessionStorage.setItem("mortgageTerms", mortgageTerms);
             functionToUpdate("MortgageTypes", "MortgageTypes");
         }
         catch{

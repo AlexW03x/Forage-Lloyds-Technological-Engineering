@@ -10,12 +10,25 @@ export default function Page2(
 ){
 
     const [information, setInformation] = useState(""); //used to allow users to track their previous input values!
+    const [prevInput, setPrevInput] = useState(""); //for previous historic input
+
     useEffect(() => {
         try{
             let propertyValue = sessionStorage.getItem("propertyValue");
             let depositAmount = sessionStorage.getItem("depositAmount");
-            let loanValue = sessionStorage.getItem("loanValue");
+            let loanValue = null;
+            if(sessionStorage.getItem("loanValue")){
+                loanValue = sessionStorage.getItem("loanValue");
+            }
+            else{
+                loanValue = propertyValue - depositAmount;
+            }
             let mortgageTerms = sessionStorage.getItem("mortgageTerms");
+
+            setInformation(`Please select the mortgage type you would like to calculate!`);
+            setPrevInput(
+                `Property Value: £${propertyValue} 🔹 Deposit Amount: £${depositAmount} 🔹 Loan Value: £${loanValue} 🔹 Terms: ${mortgageTerms} Years`
+            )
         }
         catch{
 
@@ -24,8 +37,11 @@ export default function Page2(
 
     return(
         <>
-            <Notice logo="info" description="" childrenNodes={
-                <p className="text-red-400">Hello</p>
+            <Notice logo="info" description={information} childrenNodes={
+                <p className="text-[var(--lloyds-blue)] text-sm">
+                    <span class="text-[var(--lloyds-black)]">Your current inputs:</span>
+                    <br/>{prevInput}
+                </p>
             }></Notice>
         </>
     )
