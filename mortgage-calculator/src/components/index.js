@@ -9,6 +9,8 @@ import Slider from "./calculator/slider";
 
 //portal components
 import Page1 from "./calculator/portalPages/page1";
+import Page2 from "./calculator/portalPages/page2";
+import InterestButton from "./calculator/interestButton";
 
 export {
     NavigationContext,
@@ -22,4 +24,6 @@ export {
     Input,
     Slider,
     Page1,
+    Page2,
+    InterestButton,
 }

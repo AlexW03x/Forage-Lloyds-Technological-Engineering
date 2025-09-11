@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Notice from "../notice";
 import Helper from "../helper";
 import Input from "../input";
+import InterestButton from "../interestButton";
 
 //This page is utilised for selecting the type of mortgage they are going to calculate.
 
@@ -37,12 +38,14 @@ export default function Page2(
 
     return(
         <>
-            <Notice logo="info" description={information} childrenNodes={
+            <Notice logo="success" description={information} childrenNodes={
                 <p className="text-[var(--lloyds-blue)] text-sm">
                     <span className="text-[var(--lloyds-black)]">Your current inputs:</span>
                     <br/>{prevInput}
                 </p>
             }></Notice>
+
+            <InterestButton></InterestButton>
         </>
     )
 }
