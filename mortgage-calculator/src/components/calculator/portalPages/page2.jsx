@@ -47,7 +47,12 @@ export default function Page2(
                 </p>
             }></Notice>
 
-            <InterestButton icon={FixedRate}></InterestButton>
+            <InterestButton icon={FixedRate} text="Fixed Interest Rate" 
+            helper={{active: true, title:"Fixed Interest Rate", 
+                tooltip: "", 
+                classExtension: "text-[var(--lloyds-blue)]",
+                customPos: "left-5 sm:left-auto mt-1 sm:right-2"
+            }}></InterestButton>
         </>
     )
 }
