@@ -11,6 +11,7 @@ import Slider from "./slider";
 //page imports for portal
 import Page1 from "./portalPages/page1";
 import Page2 from "./portalPages/page2";
+import Page3 from "./portalPages/page3";
 
 export default function Portal(){
 
@@ -76,7 +77,7 @@ export default function Portal(){
                 let diff = unlockedPages - page;
                 //console.log(Number(page) + Number(diff)); //debug
 
-                setCurPage(pagesUnlocked[Number(page) + Number(diff) - 1]);
+                setCurPage(pagesUnlocked[Number(page) + (diff > 1 ? 1 : Number(diff)) - 1]);
                 document.getElementById("pagination_dropdown").value = Number(page) + (diff > 1 ? 1 : Number(diff));
             }
         }
@@ -100,6 +101,7 @@ export default function Portal(){
 
                         {curPage == "Beginning" && <Page1 functionToUpdate={updater}/>}
                         {curPage == "MortgageTypes" && <Page2 functionToUpdate={updater}/>}
+                        {curPage == "AdvancedSettings" && <Page3 functionToUpdate={updater}/>}
                     </div>
 
                     <div className="w-full h-[60px] flex flex-row items-center justify-center font-semibold">
