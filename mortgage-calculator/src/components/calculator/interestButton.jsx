@@ -8,19 +8,29 @@ import Helper from "./helper";
 //@params classExtension = String: add more classes as you need
 //@params customPos = String: css for custom positioning on screen
 export default function InterestButton(
-    {icon, text, 
+    {icon, text="", 
         helper={active: false, title: null, tooltip: null, classExtension: null, customPos: null},
         classExtension = null,
-        onClick=null
+        onClickFunc=null
     }
 ){
 
     const executeOnClick = () => {
         try{
-            if(onClick!=null) onClick();
+            if(text.toLowerCase().includes("fixed")){
+                sessionStorage.setItem("pathway", "Fixed Interest Rate"); //pathway for chosen calculator method
+            }
+            else if(text.toLowerCase().includes("adjustable")){
+                sessionStorage.setItem("pathway", "Adjustable Interest Rate");
+            }
+            else if(text.toLowerCase().includes("interest only")){
+                sessionStorage.setItem("pathway", "Interest Only");
+            }
+
+            onClickFunc();
         }
-        catch{
-            console.error("Function could not be executed at <InterestButton>");
+        catch(Error){
+            console.error(Error);
         }
     }
 

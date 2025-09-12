@@ -77,7 +77,7 @@ export default function Portal(){
                 //console.log(Number(page) + Number(diff)); //debug
 
                 setCurPage(pagesUnlocked[Number(page) + Number(diff) - 1]);
-                document.getElementById("pagination_dropdown").value = Number(page) + Number(diff);
+                document.getElementById("pagination_dropdown").value = Number(page) + (diff > 1 ? 1 : Number(diff));
             }
         }
         else{
@@ -99,7 +99,7 @@ export default function Portal(){
                         {/* Calculator content will go here */}
 
                         {curPage == "Beginning" && <Page1 functionToUpdate={updater}/>}
-                        {curPage == "MortgageTypes" && <Page2/>}
+                        {curPage == "MortgageTypes" && <Page2 functionToUpdate={updater}/>}
                     </div>
 
                     <div className="w-full h-[60px] flex flex-row items-center justify-center font-semibold">
