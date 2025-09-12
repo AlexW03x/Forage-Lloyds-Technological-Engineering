@@ -30,7 +30,7 @@ export default function InterestButton(
          border-[1px] border-black/20 hover:border-[var(--lloyds-dark-green)] focus:border-[var(--lloyds-dark-green)]
          flex flex-row items-center cursor-default outline-none pr-2 sm:pr-0 `}>
 
-            <div className="flex flex-row items-center cursor-pointer min-w-max w-[90%] min-h-[50px] h-auto sm:mr-4 ">
+            <div onClick={executeOnClick} className="flex flex-row items-center cursor-pointer min-w-max w-[90%] min-h-[50px] h-auto sm:mr-4 ">
                 {icon != null && 
                     <img src={icon} alt="Button Icon" draggable="false" className="object-contain w-[30px] h-[30px] mx-4"></img>
                 }

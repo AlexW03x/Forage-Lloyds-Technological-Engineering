@@ -36,11 +36,11 @@ export default function Page2(
         catch{
 
         }
-    });
+    }, []);
 
     //update next step for the user
     const doNextUpdate = (value) => {
-
+        console.log("Chosen pathway: " + value);
     }
 
     return(
@@ -59,21 +59,21 @@ export default function Page2(
                 tooltip: "A fixed-rate mortgage means your interest rate and monthly payments stay the same for the whole term of the loan. This gives you certainty and makes it easier to budget, since your payments won’t go up even if market rates rise.", 
                 classExtension: "text-[var(--lloyds-blue)]",
                 customPos: "left-5 sm:left-auto mt-1 sm:right-2"
-            }}></InterestButton>
+            }} onClick={() => doNextUpdate("FixedRate")}></InterestButton>
 
             <InterestButton icon={AdjustableRate} text="Adjustable Interest Rate" 
             helper={{active: true, title:"Adjustable Rate", 
                 tooltip: "An adjustable-rate mortgage starts with a fixed interest rate for a set period, then the rate can go up or down based on market conditions. This usually means lower payments at first, but your monthly costs may change over time.", 
                 classExtension: "text-[var(--lloyds-blue)]",
                 customPos: "left-5 sm:left-auto mt-1 sm:right-2"
-            }}></InterestButton>
+            }} onClick={() => doNextUpdate("AdjustableRate")}></InterestButton>
 
             <InterestButton icon={InterestOnly} text="Interest Only"
             helper={{active: true, title:"Interest Only", 
                 tooltip: "With an interest-only mortgage, you only pay the interest for a set period, so your monthly payments are lower at first. After that, you’ll start paying both interest and the loan amount, which means your payments will go up.", 
                 classExtension: "text-[var(--lloyds-blue)]",
                 customPos: "left-5 sm:left-auto mt-1 sm:right-2"
-            }}></InterestButton>
+            }} onClick={() => doNextUpdate("InterestOnly")}></InterestButton>
         </>
     )
 }
