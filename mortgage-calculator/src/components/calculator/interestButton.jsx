@@ -37,7 +37,7 @@ export default function InterestButton(
     return(
         <>
         <button className={`w-[95%] rounded-lg min-h-[50px] h-auto ${classExtension} bg-[var(--lloyds-grey)] mx-auto mt-4 
-         border-[1px] border-black/20 hover:border-[var(--lloyds-dark-green)] focus:border-[var(--lloyds-dark-green)]
+         border-[1px] hover:border-[var(--lloyds-dark-green)] focus:border-[var(--lloyds-dark-green)]
          flex flex-row items-center cursor-default outline-none pr-2 sm:pr-0 `}>
 
             <div onClick={executeOnClick} className="flex flex-row items-center cursor-pointer min-w-max w-[90%] min-h-[50px] h-auto sm:mr-4 ">
