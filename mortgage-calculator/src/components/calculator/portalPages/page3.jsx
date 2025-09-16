@@ -186,13 +186,13 @@ export default function Page3(
                     title="Loan To Value"
                     description="Loan-to-Value (LTV) shows how much you borrow compared to how much a property is worth. It’s written as a percentage. Lower LTV means you’re borrowing less of the property’s value, which usually makes lenders see you as safer."
                     classExtensions={"lg:-translate-x-2 sm:-translate-x-4 -translate-x-2 text-[var(--lloyds-blue)]"}
-                    customPos={"w-[300px] absolute right-0 mt-1 sm:-right-12"}
+                    customPos={"min-w-[250px] absolute right-0 mt-1 sm:-right-12"}
                 />
             </div>
 
             <button onClick={updatePage} className="w-[200px] h-[40px] rounded-md text-[var(--lloyds-white)]
                 font-semibold bg-[var(--lloyds-dark-green)] mt-10 hover:opacity-70 focus:opacity-70
-                drop-shadow-[0_0_1px_black] mx-auto sm:translate-x-28">Next Page</button>
+                drop-shadow-[0_0_1px_black] mx-auto sm:translate-x-28">Calculate</button>
         </>
     )
 }

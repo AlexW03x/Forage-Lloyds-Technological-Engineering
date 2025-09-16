@@ -12,6 +12,7 @@ import Slider from "./slider";
 import Page1 from "./portalPages/page1";
 import Page2 from "./portalPages/page2";
 import Page3 from "./portalPages/page3";
+import Page4 from "./portalPages/page4";
 
 export default function Portal(){
 

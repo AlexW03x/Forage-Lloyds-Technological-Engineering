@@ -13,6 +13,7 @@ import Select from "./calculator/select";
 import Page1 from "./calculator/portalPages/page1";
 import Page2 from "./calculator/portalPages/page2";
 import Page3 from "./calculator/portalPages/page3";
+import Page4 from "./calculator/portalPages/page4";
 import InterestButton from "./calculator/interestButton";
 
 export {
@@ -29,6 +30,7 @@ export {
     Page1,
     Page2,
     Page3,
+    Page4,
     InterestButton,
     CircularProgress,
 }
