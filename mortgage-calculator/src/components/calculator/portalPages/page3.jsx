@@ -20,7 +20,7 @@ export default function Page3(
     const [loanAmount, setLoanAmount] = useState("");
     
     //for input tracking
-    const [interestRate, setInterestRate] = useState(4.00); //float
+    const [interestRate, setInterestRate] = useState(4.95); //float
     const [interestPeriod, setInterestPeriod] = useState(5);
     const [adjustmentYears, setAdjustmentYears] = useState("");
 
@@ -84,7 +84,28 @@ export default function Page3(
     }
 
     //for updating the page to the results
+    const updatePage = () => {
+        if(pathway.toLowerCase().includes("adjust")){
+            if(interestRate < 1 || interestRate > 10){
+                setError("Invalid Interest Rate! Has to be between 1-10%");
+                return;
+            }
+        }
+        else{
+            if(interestRate < 1 || interestRate > 20){
+                setError("Invalid Interest Rate! Has to be between 1-20%");
+                return;
+            }
+        }
 
+        setError("");
+        try{
+            functionToUpdate("Results", "Results");
+        }
+        catch{
+
+        }
+    }
 
     return(
         <>
@@ -96,11 +117,11 @@ export default function Page3(
                 </p>
             }></Notice>
 
-            {error != "" && <p className="mt-4 mb-2 text-center font-semibold mx-2 text-[var(--lloyds-red)]">{error}</p>}
+            {error != "" && <p className="mt-4 text-center font-semibold mx-2 text-[var(--lloyds-red)]">{error}</p>}
 
             <div className="z-[7]">
-                <Input type="text" label={pathway.toLowerCase().includes("adjust") ? "Initial Interest Rate (%): " : `Interest Rate (%): `}
-                classExtensions={"mt-8 flex justify-center sm:-ml-1"}
+                <Input type="number" label={pathway.toLowerCase().includes("adjust") ? "Initial Interest Rate (%): " : `Interest Rate (%): `}
+                classExtensions={"mt-6 flex justify-center sm:-ml-1"}
                 placeholder="Any % from 0.00-20.00" 
                 helper={
                     {   
@@ -169,7 +190,7 @@ export default function Page3(
                 />
             </div>
 
-            <button onClick={() => {}} className="w-[200px] h-[40px] rounded-md text-[var(--lloyds-white)]
+            <button onClick={updatePage} className="w-[200px] h-[40px] rounded-md text-[var(--lloyds-white)]
                 font-semibold bg-[var(--lloyds-dark-green)] mt-10 hover:opacity-70 focus:opacity-70
                 drop-shadow-[0_0_1px_black] mx-auto sm:translate-x-28">Next Page</button>
         </>
