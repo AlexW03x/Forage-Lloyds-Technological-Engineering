@@ -30,7 +30,8 @@ export default function Page3(
             let mortgageTerms = sessionStorage.getItem("mortgageTerms");
             let path = sessionStorage.getItem("pathway");
             setPathway(String(path)); 
-
+            let loan_to_value = (parseFloat(loanValue) / parseFloat(propertyValue)) * 100;
+            setLTV(loan_to_value);
             setInformation(`Please select the mortgage type you would like to calculate!`);
             setPrevInput(
                 `Property Value: £${propertyValue} 🔹 Depositing: £${depositAmount} 🔹 Loaning: £${loanValue} 🔹 
@@ -67,7 +68,9 @@ export default function Page3(
                     }
                 }/>
 
-                <CircularProgress percentage={75}></CircularProgress>
+                <CircularProgress percentage={loanToValue}
+
+                ></CircularProgress>
             </div>
             }
         </>

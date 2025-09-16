@@ -35,11 +35,12 @@ export default function Page1({functionToUpdate}){
             }
 
             if(sessionStorage.getItem("loanAmount")){
-                setLoanValue(sessionStorage.getItem("loanAmount"));
+                let loan = sessionStorage.getItem("loanAmount");
+                setLoanValue(Number(loan));
             }
         }
-        catch{
-
+        catch(error){
+            console.error(error || "Failed to fetch history or non exists!");
         }
     },[]);
 
@@ -51,9 +52,11 @@ export default function Page1({functionToUpdate}){
         }
         else{
             //auto update label for loan value
-            setLoanValue(propertyValue - depositAmount);
-            if(loanValue < 0){
-                setError("Error insufficient borrowing!"); //notice of insufficiency
+            if(sessionStorage.getItem("loanAmount") == ""){
+                setLoanValue(propertyValue - depositAmount);
+                if(loanValue < 0){
+                    setError("Error insufficient borrowing!"); //notice of insufficiency
+                }
             }
         }
     }, [propertyValue, depositAmount]);
@@ -105,6 +108,8 @@ export default function Page1({functionToUpdate}){
                 setErrorArea("depositAmount");
                 return;
             }
+
+            
 
             setError("");
             setErrorArea(""); //clear errors
