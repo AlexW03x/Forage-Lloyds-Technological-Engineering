@@ -29,14 +29,13 @@ export default function Page3(
                 loanValue = propertyValue - depositAmount;
             }
             let mortgageTerms = sessionStorage.getItem("mortgageTerms");
-            let path = sessionStorage.getItem("pathway");
-            setPathway(String(path)); 
+            setPathway(sessionStorage.getItem("pathway"));
             let loan_to_value = (parseFloat(loanValue) / parseFloat(propertyValue)) * 100;
             setLTV(loan_to_value);
             setInformation(`Please select the mortgage type you would like to calculate!`);
             setPrevInput(
                 `Property Value: £${propertyValue} 🔹 Depositing: £${depositAmount} 🔹 Loaning: £${loanValue} 🔹 
-                Terms: ${mortgageTerms} Years 🔹 Type: ${pathway}`
+                Terms: ${mortgageTerms} Years`
             );
 
 
@@ -51,12 +50,12 @@ export default function Page3(
             <Notice logo="success" description="Please fill in the remaining inputs to calculate your mortgage" childrenNodes={
                 <p className="text-[var(--lloyds-blue)] text-sm">
                     <span className="text-[var(--lloyds-black)]">Your current inputs:</span>
-                    <br/>{prevInput}
+                    <br/>{prevInput} 🔹 Type: {pathway}
                 </p>
             }></Notice>
 
             {error != "" && <p className="mt-4 mb-2 text-center font-semibold mx-2 text-[var(--lloyds-red)]">{error}</p>}
-            {pathway.toLowerCase().includes("fixed") && 
+            {(pathway.toLowerCase().includes("fixed") || pathway.toLowerCase().includes("only")) && 
             <div>
                 <Input type="text" label="Interest Rate (%): "
                 classExtensions={"mt-8 flex justify-center sm:-ml-1"}
