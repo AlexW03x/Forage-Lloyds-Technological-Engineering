@@ -19,7 +19,7 @@ export default function Page3(
     const [loanAmount, setLoanAmount] = useState("");
     
     //for input tracking
-    const [interestRate, setInterestRate] = useState(5.00); //float
+    const [interestRate, setInterestRate] = useState(4.00); //float
     const [interestPeriod, setInterestPeriod] = useState(5);
 
     useEffect(() => { //fetch historic session cache for user tracking
@@ -72,20 +72,23 @@ export default function Page3(
             }></Notice>
 
             {error != "" && <p className="mt-4 mb-2 text-center font-semibold mx-2 text-[var(--lloyds-red)]">{error}</p>}
-            {(pathway.toLowerCase().includes("fixed") || pathway.toLowerCase().includes("only")) && 
+
             <div className="z-[6]">
-                <Input type="text" label="Interest Rate (%): "
+                <Input type="text" label={pathway.toLowerCase().includes("adjust") ? "Initial Interest Rate (%): " : `Interest Rate (%): `}
                 classExtensions={"mt-8 flex justify-center sm:-ml-1"}
                 placeholder="Any % from 0.00-20.00" 
                 helper={
                     {   
                         active: true, 
-                        title: "Interest Rate (%)", 
-                        tooltip: "Any value from 0-20 with a maximum of 2 decimal points, for example: 4.95% interest. This will determine your fixed mortgage repayments."
+                        title: pathway.toLowerCase().includes("adjust") ? "Initial Interest Rate (%): " : `Interest Rate (%): `, 
+                        tooltip: 
+                            pathway.toLowerCase().includes("adjust") ? 
+                            "The initial interest rate is the starting rate on an adjustable mortgage. It usually lasts for a few years at a lower cost, then changes based on the market. This means your payments may go up or down after the initial period ends. Rates: Minimum: 1% | Maximum: 10%" 
+                            : 
+                            "The interest rate is the percentage a lender charges on your mortgage loan. It decides how much you pay each month, along with how much you repay overall. Rates: Minimum: 1% | Maximum: 20%"
                     }
                 } value={interestRate} onChange={updateInterest}/>
             </div>
-            }
 
             {pathway.toLowerCase().includes("only") &&
             <div>
@@ -95,6 +98,12 @@ export default function Page3(
                     classExtensions={"mt-4 flex justify-center sm:-ml-1"}
                     value={interestPeriod} onChange={updatePeriod}
                 ></Slider>
+            </div>
+            }
+
+            {pathway.toLowerCase().includes("adjust") &&
+            <div>
+
             </div>
             }
 
