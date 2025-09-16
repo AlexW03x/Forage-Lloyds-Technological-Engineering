@@ -19,7 +19,7 @@ export default function Page3(
     const [loanAmount, setLoanAmount] = useState("");
     
     //for input tracking
-    const [interestRate, setInterestRate] = useState(0.00); //float
+    const [interestRate, setInterestRate] = useState(5.00); //float
     const [interestPeriod, setInterestPeriod] = useState(5);
 
     useEffect(() => { //fetch historic session cache for user tracking
@@ -51,6 +51,11 @@ export default function Page3(
     }, []);
 
 
+    //for fixed interest and interest only
+    const updateInterest = (e) => {
+        setInterestRate(Number(e));
+    }
+
     //for interest only functions
     const updatePeriod = (e) => {
         setInterestPeriod(Number(e));
@@ -78,7 +83,7 @@ export default function Page3(
                         title: "Interest Rate (%)", 
                         tooltip: "Any value from 0-20 with a maximum of 2 decimal points, for example: 4.95% interest. This will determine your fixed mortgage repayments."
                     }
-                }/>
+                } value={interestRate} onChange={updateInterest}/>
             </div>
             }
 
