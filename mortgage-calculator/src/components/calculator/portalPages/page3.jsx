@@ -4,6 +4,7 @@ import Input from "../input";
 import CircularProgress from "../circularProgress";
 import Helper from "../helper";
 import Slider from "../slider";
+import Select from "../select";
 
 export default function Page3(
     {functionToUpdate=null}
@@ -21,6 +22,7 @@ export default function Page3(
     //for input tracking
     const [interestRate, setInterestRate] = useState(4.00); //float
     const [interestPeriod, setInterestPeriod] = useState(5);
+    const [adjustmentYears, setAdjustmentYears] = useState("");
 
     useEffect(() => { //fetch historic session cache for user tracking
         try{
@@ -44,6 +46,17 @@ export default function Page3(
             setLTV(loan_to_value);
             setInformation(`Please fill in the remaining inputs to calculate your mortgage`);
 
+
+            //for the current information displayed
+            if(sessionStorage.getItem("InterestRate")){
+                setInterestRate(sessionStorage.getItem("InterestRate"));
+            }
+            if(sessionStorage.getItem("InterestPeriod")){
+                setInterestPeriod(sessionStorage.getItem("InterestPeriod"));
+            }
+            if(sessionStorage.getItem("AdjustmentFrequency")){
+                setAdjustmentYears(sessionStorage.getItem("AdjustmentFrequency"));
+            }
         }
         catch{
             
@@ -54,11 +67,20 @@ export default function Page3(
     //for fixed interest and interest only
     const updateInterest = (e) => {
         setInterestRate(Number(e));
+        sessionStorage.setItem("InterestRate", e);
     }
 
     //for interest only functions
     const updatePeriod = (e) => {
         setInterestPeriod(Number(e));
+        sessionStorage.setItem("InterestPeriod", e);
+    }
+
+    //for adjustable interest functions
+    const updateAdjustment = (e) => {
+        setAdjustmentYears(e);
+        sessionStorage.setItem("AdjustmentFrequency", e);
+        //console.log(sessionStorage.getItem("AdjustmentFrequency"));
     }
 
     return(
@@ -73,7 +95,7 @@ export default function Page3(
 
             {error != "" && <p className="mt-4 mb-2 text-center font-semibold mx-2 text-[var(--lloyds-red)]">{error}</p>}
 
-            <div className="z-[6]">
+            <div className="z-[7]">
                 <Input type="text" label={pathway.toLowerCase().includes("adjust") ? "Initial Interest Rate (%): " : `Interest Rate (%): `}
                 classExtensions={"mt-8 flex justify-center sm:-ml-1"}
                 placeholder="Any % from 0.00-20.00" 
@@ -100,10 +122,28 @@ export default function Page3(
                 ></Slider>
             </div>
             }
+            
 
             {pathway.toLowerCase().includes("adjust") &&
-            <div>
-
+            <div className="z-[6]">
+                <Select label="Adjustment Frequency: "
+                classExtensions={"mt-4 flex justify-center sm:-ml-1"} options={
+                    <>
+                        <option value="1">1 Years</option>
+                        <option value="2">2 Years</option>
+                        <option value="3">3 Years</option>
+                        <option value="5">5 Years</option>
+                        <option value="10">10 Years</option>
+                    </>
+                }
+                helper={{
+                    active:true, 
+                    title: "Adjustment Frequency", 
+                    tooltip: "Adjustment frequency is how often the interest rate on an adjustable mortgage can change after the initial period. For example, if it’s set to 1 year, the rate may change once every year"
+                }}
+                value={adjustmentYears}
+                onChange={updateAdjustment}
+                />
             </div>
             }
 

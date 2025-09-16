@@ -7,6 +7,7 @@ import Notice from "./calculator/notice";
 import Input from "./calculator/input";
 import Slider from "./calculator/slider";
 import CircularProgress from "./calculator/circularProgress";
+import Select from "./calculator/select";
 
 //portal components
 import Page1 from "./calculator/portalPages/page1";
