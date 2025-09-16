@@ -83,6 +83,9 @@ export default function Page3(
         //console.log(sessionStorage.getItem("AdjustmentFrequency"));
     }
 
+    //for updating the page to the results
+
+
     return(
         <>
             <Notice logo="success" description={information} childrenNodes={
@@ -152,7 +155,8 @@ export default function Page3(
                 <div className="sm:max-w-[300px] w-[100%] flex sm:justify-end justify-center">
                     <CircularProgress 
                     percentage={loanToValue.toFixed(2)} size={80} strokeWidth={6}
-                    classExtensions={"text-[var(--lloyds-dark-green)]"}
+                    classExtensions={`${loanToValue < 60 ? "text-[var(--lloyds-dark-green)]" :
+                        loanToValue < 80 ? "text-[var(--lloyds-orange)]" : "text-[var(--lloyds-red)]"}`}
                     textExtensions={"text-md font-semibold"}
                 />
                 </div>
