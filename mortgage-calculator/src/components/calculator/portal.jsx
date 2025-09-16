@@ -42,7 +42,11 @@ export default function Portal(){
         console.log(lengthOfPagesUnlocked);
         try{
             document.getElementById(`pagination_${lengthOfPagesUnlocked}`).disabled = false; //undisable the navigation per access of page
-            document.getElementById("pagination_dropdown").value = lengthOfPagesUnlocked; //update to new page
+
+            //to update pagination correctly
+            let page = document.getElementById("pagination_dropdown").value;
+            let diff = lengthOfPagesUnlocked - page;
+            document.getElementById("pagination_dropdown").value = Number(page) + (diff > 1 ? 1 : Number(diff));
             //console.log(pagesUnlocked); //debug
         }
         catch{
@@ -75,7 +79,7 @@ export default function Portal(){
             if(page != unlockedPages){
                 //calculate difference of page numbers
                 let diff = unlockedPages - page;
-                //console.log(Number(page) + Number(diff)); //debug
+                //console.log("Diff" + (Number(page) + Number(diff))); //debug
 
                 setCurPage(pagesUnlocked[Number(page) + (diff > 1 ? 1 : Number(diff)) - 1]);
                 document.getElementById("pagination_dropdown").value = Number(page) + (diff > 1 ? 1 : Number(diff));

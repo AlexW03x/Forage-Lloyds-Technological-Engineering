@@ -53,7 +53,7 @@ export default function Page1({functionToUpdate}){
             //auto update label for loan value
             setLoanValue(propertyValue - depositAmount);
             if(loanValue < 0){
-                setLoanValue("Error insufficient borrowing!"); //notice of insufficiency
+                setError("Error insufficient borrowing!"); //notice of insufficiency
             }
         }
     }, [propertyValue, depositAmount]);
@@ -100,9 +100,10 @@ export default function Page1({functionToUpdate}){
                 return;
             }
 
-            if(propertyValue < depositAmount){
+            if(Number(propertyValue) < Number(depositAmount)){
                 setError("Deposit is larger than property value!");
                 setErrorArea("depositAmount");
+                return;
             }
 
             setError("");
