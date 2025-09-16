@@ -13,8 +13,8 @@ export default function Page3(
             let propertyValue = sessionStorage.getItem("propertyValue");
             let depositAmount = sessionStorage.getItem("depositAmount");
             let loanValue = "";
-            if(sessionStorage.getItem("loanValue")){
-                loanValue = sessionStorage.getItem("loanValue"); //auto calculate if doesn't exist
+            if(sessionStorage.getItem("loanAmount")){
+                loanValue = sessionStorage.getItem("loanAmount"); //auto calculate if doesn't exist
             }
             else{
                 loanValue = propertyValue - depositAmount;
@@ -36,7 +36,7 @@ export default function Page3(
 
     return(
         <>
-            <Notice logo="success" description="Test" childrenNodes={
+            <Notice logo="success" description="Please fill in the remaining inputs to calculate your mortgage" childrenNodes={
                 <p className="text-[var(--lloyds-blue)] text-sm">
                     <span className="text-[var(--lloyds-black)]">Your current inputs:</span>
                     <br/>{prevInput}

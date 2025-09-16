@@ -21,8 +21,8 @@ export default function Page2(
             let propertyValue = sessionStorage.getItem("propertyValue");
             let depositAmount = sessionStorage.getItem("depositAmount");
             let loanValue = null;
-            if(sessionStorage.getItem("loanValue")){
-                loanValue = sessionStorage.getItem("loanValue");
+            if(sessionStorage.getItem("loanAmount")){
+                loanValue = sessionStorage.getItem("loanAmount");
             }
             else{
                 loanValue = propertyValue - depositAmount;
