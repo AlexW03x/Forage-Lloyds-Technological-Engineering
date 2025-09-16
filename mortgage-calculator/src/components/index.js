@@ -6,6 +6,7 @@ import Helper from "./calculator/helper";
 import Notice from "./calculator/notice";
 import Input from "./calculator/input";
 import Slider from "./calculator/slider";
+import CircularProgress from "./calculator/circularProgress";
 
 //portal components
 import Page1 from "./calculator/portalPages/page1";
@@ -28,4 +29,5 @@ export {
     Page2,
     Page3,
     InterestButton,
+    CircularProgress,
 }
