@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Notice from "../notice";
 import Input from "../input";
 import CircularProgress from "../circularProgress";
+import Helper from "../helper";
 
 export default function Page3(
     {functionToUpdate=null}
@@ -68,9 +69,19 @@ export default function Page3(
                     }
                 }/>
 
-                <CircularProgress percentage={loanToValue}
+                <div className="flex flex-row mt-6 justify-center items-center sm:gap-4 gap-2">
+                    <p className="font-semibold text-[var(--lloyds-black)] mx-2 sm:w-[150px] w-[250px] sm:text-right">Loan To Value:</p>
+                    <div className="sm:max-w-[300px] w-[100%]">
+                        <CircularProgress percentage={loanToValue.toFixed(2)}/>
+                    </div>
 
-                ></CircularProgress>
+                    <Helper
+                        title="Loan To Value"
+                        description="Loan-to-Value (LTV) shows how much you borrow compared to how much a property is worth. It’s written as a percentage. Lower LTV means you’re borrowing less of the property’s value, which usually makes lenders see you as safer."
+                        classExtensions={"lg:-translate-x-2 sm:-translate-x-4 -translate-x-2 text-[var(--lloyds-blue)]"}
+                        customPos={"w-[300px] absolute right-0 mt-1 sm:-right-12"}
+                    />
+                </div>
             </div>
             }
         </>

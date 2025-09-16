@@ -5,6 +5,7 @@ const CircularProgress = (
         percentage, 
         size = 120, 
         strokeWidth = 12,
+        marginTop = null,
         classExtensions = null,
         textExtensions = null,
         childNodes = ReactNode
@@ -15,7 +16,7 @@ const CircularProgress = (
   const offset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div className="flex items-center justify-center">
+    <div className={`flex items-center justify-center ${marginTop}`}>
       <svg
         width={size}
         height={size}
@@ -47,7 +48,7 @@ const CircularProgress = (
       </svg>
 
       {/* Text in middle */}
-      <span className={`absolute text-xl font-semibold ${textExtensions}`}>
+      <span className={`absolute ${textExtensions}`}>
         {percentage}%
         {childNodes}
       </span>
