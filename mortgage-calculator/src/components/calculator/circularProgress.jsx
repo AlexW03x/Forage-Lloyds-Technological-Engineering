@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ReactNode} from "react";
 
 const CircularProgress = (
     { 
@@ -6,6 +6,8 @@ const CircularProgress = (
         size = 120, 
         strokeWidth = 12,
         classExtensions = null,
+        textExtensions = null,
+        childNodes = ReactNode
     }
 ) => {
   const radius = (size - strokeWidth) / 2;
@@ -36,7 +38,7 @@ const CircularProgress = (
           r={radius}
           stroke="currentColor"
           strokeWidth={strokeWidth}
-          className="text-blue-500 transition-all duration-500 ease-out"
+          className={`transition-all duration-500 ease-out ${classExtensions}`}
           fill="transparent"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
@@ -45,8 +47,9 @@ const CircularProgress = (
       </svg>
 
       {/* Text in middle */}
-      <span className="absolute text-xl font-semibold text-gray-700">
+      <span className={`absolute text-xl font-semibold ${textExtensions}`}>
         {percentage}%
+        {childNodes}
       </span>
     </div>
   );
