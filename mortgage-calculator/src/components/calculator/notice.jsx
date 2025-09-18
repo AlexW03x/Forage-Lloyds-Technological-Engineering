@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { CheckMark, CrossMark, Info, Exclamation} from "../../assets";
-import React, {ReactNode} from "react";
 
-export default function Notice({logo, description, childrenNodes = ReactNode}){
+export default function Notice({logo, description, childrenNodes}){
 
     const [noticeLogo, setNoticeLogo] = useState(logo);
     const [noticeLogoAlt, setNoticeLogoAlt] = useState("Notice Logo");

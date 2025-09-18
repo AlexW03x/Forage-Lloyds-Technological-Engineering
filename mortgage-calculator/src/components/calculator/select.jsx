@@ -1,5 +1,4 @@
 import { useState } from "react";
-import React, {ReactNode} from "react";
 import Helper from "./helper";
 
 export default function Select(
@@ -7,7 +6,7 @@ export default function Select(
         onChange=null, classExtensions=null,
         value=null,
         helper = {active: false, title: null, tooltip: null},
-    error = null, options = ReactNode}
+    error = null, options}
 ){
 
     const updateValues = (input) => {

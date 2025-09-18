@@ -1,5 +1,3 @@
-import React, {ReactNode} from "react";
-
 const CircularProgress = (
     { 
         percentage, 
@@ -8,7 +6,7 @@ const CircularProgress = (
         marginTop = null,
         classExtensions = null,
         textExtensions = null,
-        childNodes = ReactNode
+        childNodes
     }
 ) => {
   const radius = (size - strokeWidth) / 2;
