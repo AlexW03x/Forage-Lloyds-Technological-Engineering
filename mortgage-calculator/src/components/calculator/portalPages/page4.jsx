@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Notice from "../notice";
+import CircularProgress from "../circularProgress";
 
 export default function Page4(){
     //variables for fetching every single user input if available
@@ -15,60 +17,61 @@ export default function Page4(){
     const [interestRate, setInterestRate] = useState("");
     const [adjustmentFrequency, setAdjustmentFrequency] = useState("");
     const [interestPeriod, setInterestPeriod] = useState("");
+    const [loanToValue, setLTV] = useState(0.00); //for showing the loan to value percentage
 
-    useEffect(() => { //onload of component fetch the values of user history immediately
-        try{
-            if(sessionStorage.getItem("propertyValue")){
-                setPropertyValue(sessionStorage.getItem("propertyValue"));
-            }
+    useEffect(() => {
+    try {
+        const storedPropertyValue = sessionStorage.getItem("propertyValue") || "";
+        const storedDepositAmount = sessionStorage.getItem("depositAmount") || "";
+        const storedLoanAmount = sessionStorage.getItem("loanAmount") || "";
+        const storedMortgageTerms = sessionStorage.getItem("mortgageTerms") || "";
+        const storedPathway = sessionStorage.getItem("pathway") || "";
+        const storedInterestRate = sessionStorage.getItem("InterestRate") || "";
+        const storedInterestPeriod = sessionStorage.getItem("InterestPeriod") || "";
+        const storedAdjustmentFrequency = sessionStorage.getItem("AdjustmentFrequency") || "";
 
-            if(sessionStorage.getItem("depositAmount")){
-                setDepositAmount(sessionStorage.getItem("depositAmount"));
-            }
+        setPropertyValue(storedPropertyValue);
+        setDepositAmount(storedDepositAmount);
+        setLoanValue(storedLoanAmount || (Number(storedPropertyValue) - Number(storedDepositAmount)));
+        setMortgageTerms(storedMortgageTerms);
+        setPathway(storedPathway);
+        setInterestRate(storedInterestRate);
+        setInterestPeriod(storedInterestPeriod);
+        setAdjustmentFrequency(storedAdjustmentFrequency);
 
-            if(sessionStorage.getItem("loanAmount")){
-                setLoanValue(sessionStorage.getItem("loanAmount"));
-            }
-            else{
-                setLoanValue((Number(propertyValue) - Number(depositAmount)));
-                if(loanValue <= 0){
-                    setLoanValue(Number(0));
-                }
-            }
+        // ✅ use local values for calculation
+        const loanAmount = storedLoanAmount
+        ? Number(storedLoanAmount)
+        : Number(storedPropertyValue) - Number(storedDepositAmount);
 
-            if(sessionStorage.getItem("mortgageTerms")){
-                setMortgageTerms(sessionStorage.getItem("mortgageTerms"));
-            }
+        const propertyVal = Number(storedPropertyValue);
 
-            if(sessionStorage.getItem("pathway")){
-                setPathway(sessionStorage.getItem("pathway"));
-            }
+        const loan_to_value =
+        propertyVal > 0 ? (loanAmount / propertyVal) * 100 : 0;
 
-            if(sessionStorage.getItem("InterestRate")){
-                setInterestRate(sessionStorage.getItem("InterestRate"));
-            }
-
-            if(sessionStorage.getItem("InterestPeriod")){
-                setInterestPeriod(sessionStorage.getItem("InterestPeriod"));
-            }
-
-            if(sessionStorage.getItem("AdjustmentFrequency")){
-                setAdjustmentFrequency(sessionStorage.getItem("AdjustmentFrequency"));
-            }
-        }
-        catch{
-            console.error("Failed to fetch history!");
-        }
+        setLTV(loan_to_value);
+    } catch {
+        console.error("Failed to fetch history!");
+    }
     }, []);
+
 
 
     return(
         <>
-            {pathway.toLowerCase().includes("fixed") && 
-                <div className="bg-black h-[60px] w-full mt-4">
-                    a
-                </div>
-            }
+            <Notice logo="info" description="Your mortgage calculations" childrenNodes={<>
+                    <span className="text-[var(--lloyds-dark-grey)] text-sm font-[400]">{pathway}</span>
+                    <CircularProgress 
+                    percentage={loanToValue.toFixed(2)} size={60} strokeWidth={4} marginTop={"absolute right-5 sm:right-7"}
+                    classExtensions={`${loanToValue < 60 ? "text-[var(--lloyds-dark-green)]" :
+                        loanToValue < 80 ? "text-[var(--lloyds-orange)]" : "text-[var(--lloyds-red)]"}`}
+                    textExtensions={"text-sm font-semibold"}
+                    />
+                    <span className="text-[var(--lloyds-black)] text-sm font-semibold absolute right-[6rem] hidden sm:block">Loan To Value: </span>
+                </>}
+            />
+            
+
         </>
     )
 }
