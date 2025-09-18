@@ -61,7 +61,7 @@ export default function Page3(
         catch{
             
         }
-    }, []);
+    }, [depositAmount, propertyValue]);
 
 
     //for fixed interest and interest only
@@ -103,7 +103,7 @@ export default function Page3(
             //check if values were updated or not for third page input if not then use default provided
             sessionStorage.setItem("InterestRate", interestRate);
             sessionStorage.setItem("InterestPeriod", interestPeriod);
-            sessionStorage.setItem("AdjustmentFrequency", adjustmentYears == "" ? "1" : adjustmentYears);
+            sessionStorage.setItem("AdjustmentFrequency", adjustmentYears === "" ? "1" : adjustmentYears);
             functionToUpdate("Results", "Results");
         }
         catch{
@@ -121,7 +121,7 @@ export default function Page3(
                 </p>
             }></Notice>
 
-            {error != "" && <p className="mt-4 text-center font-semibold mx-2 text-[var(--lloyds-red)]">{error}</p>}
+            {error !== "" && <p className="mt-4 text-center font-semibold mx-2 text-[var(--lloyds-red)]">{error}</p>}
 
             <div className="z-[7]">
                 <Input type="number" label={pathway.toLowerCase().includes("adjust") ? "Initial Interest Rate (%): " : `Interest Rate (%): `}

@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Hamburger, Logo, Lock, Search, Audio } from "../../assets";
 
 export default function Navigation(){
@@ -8,13 +7,13 @@ export default function Navigation(){
             flex flex-row 2xl:px-64 sm:px-8 px-4 items-center gap-x-4">
 
                 <div className="flex flex-row items-center gap-x-2 lg:w-auto w-[40%] sm:w-[50%]">
-                    <img src={Logo} className="h-[60px] object-contain"/>
+                    <img src={Logo} alt="logo" className="h-[60px] object-contain"/>
                     <p className="text-2xl font-bold sm:block hidden">LLOYDS</p>
                 </div>
 
                 <button className="w-auto lg:min-w-[120px] h-full hover:bg-[var(--lloyds-white)] defaultTransition text-[var(--lloyds-black)] 
                 font-semibold flex sm:flex-row flex-col items-center justify-center gap-x-4 px-4 lg:mr-[10%] 2xl:mr-[35%] lg:ml-[10%]">
-                    <img className="h-[20px] w-[20px]" src={Hamburger} draggable="false"/>
+                    <img alt="hamburger" className="h-[20px] w-[20px]" src={Hamburger} draggable="false"/>
                     Menu
                 </button>
 
@@ -33,7 +32,7 @@ export default function Navigation(){
 
                 <button className="w-auto min-w-[90px] sm:min-w-[120px] h-full hover:bg-[var(--lloyds-white)] defaultTransition text-[var(--lloyds-black)] 
                 font-semibold flex sm:flex-row flex-col items-center justify-center gap-x-4 px-4 2xl:ml-[380px] lg:ml-[320px]">
-                    <img className="h-[20px] w-[20px]" src={Lock} draggable="false"/>
+                    <img className="h-[20px] w-[20px]" alt="Login" src={Lock} draggable="false"/>
                     Log on
                 </button>
             </nav>

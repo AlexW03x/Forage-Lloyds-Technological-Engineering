@@ -4,10 +4,6 @@ export default function Helper({title, description, classExtensions=null, custom
 
     const [showHelp, setShowHelp] = useState(false);
 
-    const toggleHelp = (bool) => {
-        setShowHelp(bool);
-    }
-
 
     return(
         <>

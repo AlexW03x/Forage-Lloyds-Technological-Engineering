@@ -1,5 +1,3 @@
-
-import { useState } from "react";
 import Helper from "./helper";
 
 //@params icon = Image Url / Asset Import => Show as First Order Image Icon on Left of Button
@@ -48,7 +46,7 @@ export default function InterestButton(
                 <span className="font-semibold">{text}</span>
             </div>
 
-            {helper.active == true && 
+            {helper.active === true && 
                 <Helper title={helper.title} description={helper.tooltip} 
                     classExtensions={helper.classExtension} customPos={helper.customPos}></Helper>
             }

@@ -210,11 +210,13 @@ export default function Page4(){
             setTotalInterest(results.interestPaid);
             setChartData(results.data);
             }
+
+            console.log(propertyValue, depositAmount, mortgageTerms); //unused vars
         } 
         catch {
             console.error("Failed to fetch history!");
         }
-    }, []);
+    }, [depositAmount, mortgageTerms, propertyValue]);
 
 
 

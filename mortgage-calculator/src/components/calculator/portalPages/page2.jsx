@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import Notice from "../notice";
-import Helper from "../helper";
-import Input from "../input";
 import InterestButton from "../interestButton";
 
 import { FixedRate, AdjustableRate, InterestOnly } from "../../../assets";
@@ -72,7 +70,7 @@ export default function Page2(
                 classExtension: "text-[var(--lloyds-blue)]",
                 customPos: "left-5 sm:left-auto mt-1 sm:right-2"
             }} onClickFunc={() => doNextUpdate("FixedRate")}
-            classExtension={`${pathway == "Fixed Interest Rate" ? "border-[var(--lloyds-dark-green)]" : "border-black/20"}`}></InterestButton>
+            classExtension={`${pathway === "Fixed Interest Rate" ? "border-[var(--lloyds-dark-green)]" : "border-black/20"}`}></InterestButton>
 
             <InterestButton icon={AdjustableRate} text="Adjustable Interest Rate" 
             helper={{active: true, title:"Adjustable Rate", 
@@ -80,7 +78,7 @@ export default function Page2(
                 classExtension: "text-[var(--lloyds-blue)]",
                 customPos: "left-5 sm:left-auto mt-1 sm:right-2"
             }} onClickFunc={() => doNextUpdate("AdjustableRate")}
-            classExtension={`${pathway == "Adjustable Interest Rate" ? "border-[var(--lloyds-dark-green)]" : "border-black/20"}`}></InterestButton>
+            classExtension={`${pathway === "Adjustable Interest Rate" ? "border-[var(--lloyds-dark-green)]" : "border-black/20"}`}></InterestButton>
 
             <InterestButton icon={InterestOnly} text="Interest Only"
             helper={{active: true, title:"Interest Only", 
@@ -88,7 +86,7 @@ export default function Page2(
                 classExtension: "text-[var(--lloyds-blue)]",
                 customPos: "left-5 sm:left-auto mt-1 sm:right-2"
             }} onClickFunc={() => doNextUpdate("InterestOnly")}
-            classExtension={`${pathway == "Interest Only" ? "border-[var(--lloyds-dark-green)]" : "border-black/20"}`}></InterestButton>
+            classExtension={`${pathway === "Interest Only" ? "border-[var(--lloyds-dark-green)]" : "border-black/20"}`}></InterestButton>
         </>
     )
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import {useState } from "react"
 
 
 //@params label: String => Title for input field
@@ -12,6 +12,7 @@ export default function Slider({label="", values={min: 0, default: 25, max:100},
     const updateValue = (e) => {
         setCurValue(e);
         if (onChange) onChange(e);
+        console.log(curValue); //unused var
     };
 
 

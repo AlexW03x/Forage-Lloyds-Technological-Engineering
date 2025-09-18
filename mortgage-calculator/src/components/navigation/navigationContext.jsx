@@ -1,10 +1,9 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 
 export default function NavigationContext(){
 
-    const [curSelection, setCurrentSelection] = useState("Personal"); //define colour UI palette update with current selection
+    const curSelection = useState("Personal"); //define colour UI palette update with current selection
 
     // No navigation functionality as this is for forage and its a clone of my wireframe for the lloyds bank template
 

@@ -5,7 +5,7 @@ export default function Breadcrumbs(
 ){
 
     // Insert props into const here if using it
-    const [breadcrumbs, setBreadcrumbs] = useState([
+    const breadcrumbs = useState([
         {name: "Home", link: "/"},
         {name: "Mortgages", link: "/mortgages"},
         {name: "Calculator & Tools", link: "/calculator"},

@@ -1,12 +1,9 @@
 
-import { useEffect, useState } from "react";
+import {useState } from "react";
 
 //component imports
 import Helper from "./helper";
-import Notice from "./notice";
-import Input from "./input";
 import { Lock } from "../../assets";
-import Slider from "./slider";
 
 //page imports for portal
 import Page1 from "./portalPages/page1";
@@ -17,7 +14,7 @@ import Page4 from "./portalPages/page4";
 export default function Portal(){
 
     const [curPage, setCurPage] = useState("Beginning"); //used to identify segment where the portal is at
-    const [pagesUnlocked, setPagesUnlocked] = useState([
+    const pagesUnlocked = useState([
         "Beginning",
     ]); //used to allow users to progress further into the portal
     const texts = {
@@ -70,14 +67,14 @@ export default function Portal(){
     function paginationScroll(movement){ //for the pagination buttons to scroll pages
         let page = document.getElementById("pagination_dropdown").value;
         let unlockedPages = pagesUnlocked.length;
-        if(movement == "left"){
-            if(page != 1){
+        if(movement === "left"){
+            if(page !== 1){
                 setCurPage(pagesUnlocked[page-1-1]);
                 document.getElementById("pagination_dropdown").value = page - 1;
             }
         }
-        else if(movement == "right"){
-            if(page != unlockedPages){
+        else if(movement === "right"){
+            if(page !== unlockedPages){
                 //calculate difference of page numbers
                 let diff = unlockedPages - page;
                 //console.log("Diff" + (Number(page) + Number(diff))); //debug
@@ -104,10 +101,10 @@ export default function Portal(){
                     <div className="w-full min-h-[480px] pb-[20px] flex flex-col bg-[var(--lloyds-grey-subtle)] border-b-[1px] border-[var(--lloyds-dark-green)]/40 py-4">
                         {/* Calculator content will go here */}
 
-                        {curPage == "Beginning" && <Page1 functionToUpdate={updater}/>}
-                        {curPage == "MortgageTypes" && <Page2 functionToUpdate={updater}/>}
-                        {curPage == "AdvancedSettings" && <Page3 functionToUpdate={updater}/>}
-                        {curPage == "Results" && <Page4/>}
+                        {curPage === "Beginning" && <Page1 functionToUpdate={updater}/>}
+                        {curPage === "MortgageTypes" && <Page2 functionToUpdate={updater}/>}
+                        {curPage === "AdvancedSettings" && <Page3 functionToUpdate={updater}/>}
+                        {curPage === "Results" && <Page4/>}
                     </div>
 
                     <div className="w-full h-[60px] flex flex-row items-center justify-center font-semibold">
