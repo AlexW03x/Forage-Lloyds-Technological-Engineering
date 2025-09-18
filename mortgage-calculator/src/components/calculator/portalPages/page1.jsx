@@ -44,33 +44,39 @@ export default function Page1({functionToUpdate}){
         }
     },[]);
 
-
-    //for updating loan value based on parameters
     useEffect(() => {
-        if(canEditLoan == true){
-            //ignore
+        if (!canEditLoan) {
+            const loan = Number(propertyValue) - Number(depositAmount);
+            setLoanValue(loan > 0 ? loan : 0);
+            sessionStorage.setItem("loanAmount", loan);
         }
-        else{
-            //auto update label for loan value
-            if(sessionStorage.getItem("loanAmount") == ""){
-                setLoanValue(propertyValue - depositAmount);
-                if(loanValue < 0){
-                    setError("Error insufficient borrowing!"); //notice of insufficiency
-                }
-            }
-        }
-    }, [propertyValue, depositAmount]);
+    }, [propertyValue, depositAmount, canEditLoan]);
+
+
 
     //Storing our inputs for calculation
     const updatePropertyValue = (newVal) => {
         setPropertyValue(newVal);
         sessionStorage.setItem("propertyValue", newVal);
+
+        updateLoanValue(newVal, depositAmount); // pass latest values
     }
 
     const updateDepositValue = (newVal) => {
         setDepositAmount(newVal);
         sessionStorage.setItem("depositAmount", newVal);
+
+        updateLoanValue(propertyValue, newVal); // pass latest values
     }
+
+    const updateLoanValue = (propVal = propertyValue, depVal = depositAmount) => {
+        if (!canEditLoan) {
+            const loan = Number(propVal) - Number(depVal);
+            setLoanValue(loan > 0 ? loan : 0); // prevent negatives
+            sessionStorage.setItem("loanAmount", loan);
+        }
+    }
+
 
     const updateMortgageTerms = (newVal) => {
         setMortgageTerms(Number(newVal));
