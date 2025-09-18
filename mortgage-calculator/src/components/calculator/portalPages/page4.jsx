@@ -146,6 +146,18 @@ export default function Page4(){
                     </div>
 
                     <div className="flex flex-row font-semibold">
+                        <p className="w-[200px] text-center">Interest At:</p>
+                        <p className="ml-2"> {interestRate}%</p>
+                    </div>
+
+                    <div className="flex flex-row font-semibold">
+                        <p className="w-[200px] text-center">Duration:</p>
+                        <p className="ml-2"> {mortgageTerms} Years</p>
+                    </div>
+
+                    <div className="w-[90%] h-[1px] bg-black/20 mx-auto mt-2 mb-2"></div>
+
+                    <div className="flex flex-row font-semibold">
                         <p className="w-[200px] text-center">Monthly Payment:</p>
                         <p className="ml-2">£{Number(monthlyPayment.toFixed(2)).toLocaleString()}</p>
                     </div>
