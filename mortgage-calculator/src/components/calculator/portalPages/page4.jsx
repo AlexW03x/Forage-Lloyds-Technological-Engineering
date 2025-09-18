@@ -31,87 +31,191 @@ export default function Page4(){
     const [chartData, setChartData] = useState([]);
 
     useEffect(() => {
-    try {
-        const storedPropertyValue = sessionStorage.getItem("propertyValue") || "";
-        const storedDepositAmount = sessionStorage.getItem("depositAmount") || "";
-        const storedLoanAmount = sessionStorage.getItem("loanAmount") || "";
-        const storedMortgageTerms = sessionStorage.getItem("mortgageTerms") || "";
-        const storedPathway = sessionStorage.getItem("pathway") || "";
-        const storedInterestRate = sessionStorage.getItem("InterestRate") || "";
-        const storedInterestPeriod = sessionStorage.getItem("InterestPeriod") || "";
-        const storedAdjustmentFrequency = sessionStorage.getItem("AdjustmentFrequency") || "";
+        try {
+            const storedPropertyValue = sessionStorage.getItem("propertyValue") || "";
+            const storedDepositAmount = sessionStorage.getItem("depositAmount") || "";
+            const storedLoanAmount = sessionStorage.getItem("loanAmount") || "";
+            const storedMortgageTerms = sessionStorage.getItem("mortgageTerms") || "";
+            const storedPathway = sessionStorage.getItem("pathway") || "";
+            const storedInterestRate = sessionStorage.getItem("InterestRate") || "";
+            const storedInterestPeriod = sessionStorage.getItem("InterestPeriod") || "";
+            const storedAdjustmentFrequency = sessionStorage.getItem("AdjustmentFrequency") || "";
 
-        setPropertyValue(storedPropertyValue);
-        setDepositAmount(storedDepositAmount);
-        setLoanValue(storedLoanAmount || (Number(storedPropertyValue) - Number(storedDepositAmount)));
-        setMortgageTerms(storedMortgageTerms);
-        setPathway(storedPathway);
-        setInterestRate(storedInterestRate);
-        setInterestPeriod(storedInterestPeriod);
-        setAdjustmentFrequency(storedAdjustmentFrequency);
+            //after retrieving session storage set all variables with those values
+            setPropertyValue(storedPropertyValue);
+            setDepositAmount(storedDepositAmount);
+            setLoanValue(
+            storedLoanAmount ||
+                (Number(storedPropertyValue) - Number(storedDepositAmount))
+            );
+            setMortgageTerms(storedMortgageTerms);
+            setPathway(storedPathway);
+            setInterestRate(storedInterestRate);
+            setInterestPeriod(storedInterestPeriod);
+            setAdjustmentFrequency(storedAdjustmentFrequency);
 
-        const loanAmount = storedLoanAmount
-        ? Number(storedLoanAmount)
-        : Number(storedPropertyValue) - Number(storedDepositAmount);
+            // calculate loan to value percentage
+            const loanAmount = storedLoanAmount
+            ? Number(storedLoanAmount)
+            : Number(storedPropertyValue) - Number(storedDepositAmount);
+            const propertyVal = Number(storedPropertyValue);
 
-        const propertyVal = Number(storedPropertyValue);
+            const loan_to_value =
+            propertyVal > 0 ? (loanAmount / propertyVal) * 100 : 0;
+            setLTV(loan_to_value);
 
-        const loan_to_value =
-        propertyVal > 0 ? (loanAmount / propertyVal) * 100 : 0;
+            // Calculations for each type of loans
+            const calcFixed = (loan, ratePercent, years) => {
+            const r = ratePercent / 100 / 12;
+            const n = years * 12;
 
-        setLTV(loan_to_value);
-
-        // ✅ Fixed Rate calculation
-        if (storedPathway.toLowerCase().includes("fixed")) {
-            const r = Number(storedInterestRate) / 100 / 12; // monthly rate
-            const n = Number(storedMortgageTerms) * 12; // months
-
-            let monthly = 0;
-            if (r > 0) {
-                monthly = (r * loanAmount) / (1 - Math.pow(1 + r, -n));
-            } else {
-                monthly = loanAmount / n; // handle 0% interest edge case
-            }
-
+            let monthly = r > 0 ? (r * loan) / (1 - Math.pow(1 + r, -n)) : loan / n;
             const totalPaid = monthly * n;
-            const interestPaid = totalPaid - loanAmount;
+            const interestPaid = totalPaid - loan;
 
-            setMonthlyPayment(monthly);
-            setTotalRepayment(totalPaid);
-            setTotalInterest(interestPaid);
-
-            // ✅ Build amortization chart data (year by year)
-            let balance = loanAmount;
+            let balance = loan;
             let data = [];
-
-            for (let year = 1; year <= Number(storedMortgageTerms); year++) {
+            for (let year = 1; year <= years; year++) {
                 let interestYear = 0;
                 let principalYear = 0;
 
-                for (let month = 1; month <= 12; month++) {
-                    const interestMonth = balance * r;
-                    const principalMonth = monthly - interestMonth;
-                    balance -= principalMonth;
+                for (let m = 1; m <= 12; m++) {
+                const interestMonth = balance * r;
+                const principalMonth = monthly - interestMonth;
+                balance -= principalMonth;
 
-                    interestYear += interestMonth;
-                    principalYear += principalMonth;
+                interestYear += interestMonth;
+                principalYear += principalMonth;
                 }
 
                 data.push({
-                    year,
-                    interest: Math.round(interestYear),
-                    principal: Math.round(principalYear),
-                    balance: Math.max(Math.round(balance), 0),
+                year,
+                interest: Math.round(interestYear),
+                principal: Math.round(principalYear),
+                balance: Math.max(Math.round(balance), 0),
                 });
             }
 
-            setChartData(data);
+            return { monthly, totalPaid, interestPaid, data };
+            };
+
+            const calcAdjustable = (loan, initialRatePercent, years, freqYears) => {
+            const n = years * 12;
+            let balance = loan;
+            let totalInterest = 0;
+            let monthlyPayment = 0;
+            let data = [];
+
+            for (let month = 1; month <= n; month++) {
+                // Example: increase by 0.25% each adjustment
+                const adjustedRate =
+                (initialRatePercent +
+                    Math.floor(month / (freqYears * 12)) * 0.25) /
+                100 /
+                12;
+
+                monthlyPayment =
+                adjustedRate > 0
+                    ? (adjustedRate * balance) /
+                    (1 - Math.pow(1 + adjustedRate, -(n - month + 1)))
+                    : balance / (n - month + 1);
+
+                const interestMonth = balance * adjustedRate;
+                const principalMonth = monthlyPayment - interestMonth;
+                balance -= principalMonth;
+                totalInterest += interestMonth;
+
+                if (month % 12 === 0) {
+                data.push({
+                    year: month / 12,
+                    interest: Math.round(totalInterest),
+                    principal: Math.round(loan + totalInterest - balance - loan),
+                    balance: Math.max(Math.round(balance), 0),
+                });
+                }
+            }
+
+            return {
+                monthly: monthlyPayment,
+                totalPaid: loan + totalInterest,
+                interestPaid: totalInterest,
+                data,
+            };
+            };
+
+            const calcInterestOnly = (loan, ratePercent, years, interestOnlyYears) => {
+            const r = ratePercent / 100 / 12;
+            const n = years * 12;
+            const ioMonths = interestOnlyYears * 12;
+
+            const interestOnlyPayment = loan * r;
+            let totalInterest = interestOnlyPayment * ioMonths;
+
+            let balance = loan;
+            let data = [];
+
+            // Interest-only phase
+            for (let year = 1; year <= interestOnlyYears; year++) {
+                data.push({
+                year,
+                interest: Math.round(interestOnlyPayment * 12),
+                principal: 0,
+                balance: loan,
+                });
+            }
+
+            // Repayment phase
+            const repayMonths = n - ioMonths;
+            let monthly = r > 0 ? (r * loan) / (1 - Math.pow(1 + r, -repayMonths)) : loan / repayMonths;
+
+            for (let year = interestOnlyYears + 1; year <= years; year++) {
+                let interestYear = 0;
+                let principalYear = 0;
+
+                for (let m = 1; m <= 12; m++) {
+                const interestMonth = balance * r;
+                const principalMonth = monthly - interestMonth;
+                balance -= principalMonth;
+
+                interestYear += interestMonth;
+                principalYear += principalMonth;
+                totalInterest += interestMonth;
+                }
+
+                data.push({
+                year,
+                interest: Math.round(interestYear),
+                principal: Math.round(principalYear),
+                balance: Math.max(Math.round(balance), 0),
+                });
+            }
+
+            const totalPaid = loan + totalInterest;
+            return { monthly: monthly, totalPaid, interestPaid: totalInterest, data };
+            };
+
+            // 🔹 Run correct calculation
+            let results = null;
+            if (storedPathway.toLowerCase().includes("fixed")) {
+            results = calcFixed(loanAmount, Number(storedInterestRate), Number(storedMortgageTerms));
+            } else if (storedPathway.toLowerCase().includes("adjustable")) {
+            results = calcAdjustable(loanAmount, Number(storedInterestRate), Number(storedMortgageTerms), Number(storedAdjustmentFrequency));
+            } else if (storedPathway.toLowerCase().includes("interest")) {
+            results = calcInterestOnly(loanAmount, Number(storedInterestRate), Number(storedMortgageTerms), Number(storedInterestPeriod));
+            }
+
+            if (results) {
+            setMonthlyPayment(results.monthly);
+            setTotalRepayment(results.totalPaid);
+            setTotalInterest(results.interestPaid);
+            setChartData(results.data);
+            }
+        } 
+        catch {
+            console.error("Failed to fetch history!");
         }
-    } 
-    catch {
-        console.error("Failed to fetch history!");
-    }
     }, []);
+
 
 
 
@@ -129,45 +233,60 @@ export default function Page4(){
                 </>}
             />
 
-            {pathway.toLowerCase().includes("fixed") &&
             <div className="w-[98%] mx-auto flex flex-col sm:flex-row gap-6 mt-8">
                 <div className="w-[98%] sm:w-[40%] flex flex-col mx-auto justify-center sm:order-1 order-2">
                     <p className="text-lg font-semibold text-[var(--lloyds-dark-green)] mx-2 mb-4 flex flex-row items-center justify-center">
                         Your Agreement:
-                        <Helper title="Agreement" 
-                            description="Monthly Payment is the monthly cost including loan repayment and interest. Interest paid is the total extra money you'll pay from interest built up over the years. Total repayment is the total you'll pay back (loan + interest accumulated)." 
-                            classExtensions={"text-[var(--lloyds-black)]"}
-                            customPos={"left-4"}
+                        <Helper 
+                        title="Agreement" 
+                        description="Monthly Payment is the monthly cost including loan repayment and interest. Interest paid is the total extra money you'll pay from interest built up over the years. Total repayment is the total you'll pay back (loan + interest accumulated)." 
+                        classExtensions={"text-[var(--lloyds-black)]"} 
+                        customPos={"left-4"} 
                         />
                     </p>
-                    <div className="flex flex-row font-semibold">
+
+                    <div className="flex flex-row font-semibold sm:ml-0 ml-6">
                         <p className="w-[200px] text-center">Your Loaning:</p>
-                        <p className="ml-2">£{Number(loanValue).toFixed(2).toLocaleString()}</p>
+                        <p className="ml-2">£{Number(loanValue).toLocaleString()}</p>
                     </div>
 
-                    <div className="flex flex-row font-semibold">
-                        <p className="w-[200px] text-center">Interest At:</p>
-                        <p className="ml-2"> {interestRate}%</p>
+                    {/* Always show Interest Rate */}
+                    <div className="flex flex-row font-semibold sm:ml-0 ml-6">
+                        <p className="w-[200px] text-center">
+                        {pathway.toLowerCase().includes("adjustable") ? "Initial Interest Rate:" : "Interest Rate:"}
+                        </p>
+                        <p className="ml-2">{interestRate}%</p>
                     </div>
 
-                    <div className="flex flex-row font-semibold">
-                        <p className="w-[200px] text-center">Duration:</p>
-                        <p className="ml-2"> {mortgageTerms} Years</p>
-                    </div>
+                    {/* Only show adjustment frequency for adjustable */}
+                    {pathway.toLowerCase().includes("adjustable") && (
+                        <div className="flex flex-row font-semibold sm:ml-0 ml-6">
+                        <p className="w-[200px] text-center">Adjustment Frequency:</p>
+                        <p className="ml-2">{adjustmentFrequency} years</p>
+                        </div>
+                    )}
+
+                    {/* Only show interest-only period */}
+                    {pathway.toLowerCase().includes("only") && (
+                        <div className="flex flex-row font-semibold sm:ml-0 ml-6">
+                        <p className="w-[200px] text-center">Interest-Only Period:</p>
+                        <p className="ml-2">{interestPeriod} years</p>
+                        </div>
+                    )}
 
                     <div className="w-[90%] h-[1px] bg-black/20 mx-auto mt-2 mb-2"></div>
 
-                    <div className="flex flex-row font-semibold">
+                    <div className="flex flex-row font-semibold sm:ml-0 ml-6">
                         <p className="w-[200px] text-center">Monthly Payment:</p>
                         <p className="ml-2">£{Number(monthlyPayment.toFixed(2)).toLocaleString()}</p>
                     </div>
 
-                    <div className="flex flex-row font-semibold">
+                    <div className="flex flex-row font-semibold sm:ml-0 ml-6">
                         <p className="w-[200px] text-center">Total Interest Paid:</p>
                         <p className="ml-2">£{Number(totalInterest.toFixed(2)).toLocaleString()}</p>
                     </div>
 
-                    <div className="flex flex-row font-semibold">
+                    <div className="flex flex-row font-semibold sm:ml-0 ml-6">
                         <p className="w-[200px] text-center">Total Repayment:</p>
                         <p className="ml-2">£{Number(totalRepayment.toFixed(2)).toLocaleString()}</p>
                     </div>
@@ -201,7 +320,7 @@ export default function Page4(){
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
-            </div>}
+            </div>
         </>
     )
 }
