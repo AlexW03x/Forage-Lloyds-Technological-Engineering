@@ -100,6 +100,10 @@ export default function Page3(
 
         setError("");
         try{
+            //check if values were updated or not for third page input if not then use default provided
+            sessionStorage.setItem("InterestRate", interestRate);
+            sessionStorage.setItem("InterestPeriod", interestPeriod);
+            sessionStorage.setItem("AdjustmentFrequency", adjustmentYears == "" ? "1" : adjustmentYears);
             functionToUpdate("Results", "Results");
         }
         catch{

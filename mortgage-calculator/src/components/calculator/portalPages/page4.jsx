@@ -19,6 +19,11 @@ export default function Page4(){
     const [interestPeriod, setInterestPeriod] = useState("");
     const [loanToValue, setLTV] = useState(0.00); //for showing the loan to value percentage
 
+    //for fixed rate calculations
+    const [monthlyPayment, setMonthlyPayment] = useState(0);
+    const [totalInterest, setTotalInterest] = useState(0);
+    const [totalRepayment, setTotalRepayment] = useState(0);
+
     useEffect(() => {
     try {
         const storedPropertyValue = sessionStorage.getItem("propertyValue") || "";
@@ -39,7 +44,6 @@ export default function Page4(){
         setInterestPeriod(storedInterestPeriod);
         setAdjustmentFrequency(storedAdjustmentFrequency);
 
-        // ✅ use local values for calculation
         const loanAmount = storedLoanAmount
         ? Number(storedLoanAmount)
         : Number(storedPropertyValue) - Number(storedDepositAmount);
@@ -50,7 +54,28 @@ export default function Page4(){
         propertyVal > 0 ? (loanAmount / propertyVal) * 100 : 0;
 
         setLTV(loan_to_value);
-    } catch {
+
+        // ✅ Fixed Rate calculation
+        if (storedPathway.toLowerCase().includes("fixed")) {
+            const r = Number(storedInterestRate) / 100 / 12; // monthly rate
+            const n = Number(storedMortgageTerms) * 12; // months
+
+            let monthly = 0;
+            if (r > 0) {
+                monthly = (r * loanAmount) / (1 - Math.pow(1 + r, -n));
+            } else {
+                monthly = loanAmount / n; // handle 0% interest edge case
+            }
+
+            const totalPaid = monthly * n;
+            const interestPaid = totalPaid - loanAmount;
+
+            setMonthlyPayment(monthly);
+            setTotalRepayment(totalPaid);
+            setTotalInterest(interestPaid);
+        }
+    } 
+    catch {
         console.error("Failed to fetch history!");
     }
     }, []);
@@ -71,7 +96,15 @@ export default function Page4(){
                 </>}
             />
             
-
+            {/* ✅ Results for Fixed Rate */}
+            {pathway.toLowerCase().includes("fixed") && (
+                <div className="mt-6 p-4 border rounded-lg bg-[var(--lloyds-light-grey)]">
+                    <p className="text-[var(--lloyds-black)] font-semibold">Loan Amount: £{Number(loanValue).toLocaleString()}</p>
+                    <p className="text-[var(--lloyds-black)]">Monthly Payment: £{monthlyPayment.toFixed(2)}</p>
+                    <p className="text-[var(--lloyds-black)]">Total Interest Paid: £{totalInterest.toFixed(2)}</p>
+                    <p className="text-[var(--lloyds-black)]">Total Repayment: £{totalRepayment.toFixed(2)}</p>
+                </div>
+            )}
         </>
     )
 }
