@@ -107,6 +107,7 @@ export default function Portal(){
                         {curPage == "Beginning" && <Page1 functionToUpdate={updater}/>}
                         {curPage == "MortgageTypes" && <Page2 functionToUpdate={updater}/>}
                         {curPage == "AdvancedSettings" && <Page3 functionToUpdate={updater}/>}
+                        {curPage == "Results" && <Page4/>}
                     </div>
 
                     <div className="w-full h-[60px] flex flex-row items-center justify-center font-semibold">
