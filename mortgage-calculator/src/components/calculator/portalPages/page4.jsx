@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import Notice from "../notice";
 import CircularProgress from "../circularProgress";
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import Helper from "../helper";
+
 
 export default function Page4(){
     //variables for fetching every single user input if available
@@ -23,6 +26,9 @@ export default function Page4(){
     const [monthlyPayment, setMonthlyPayment] = useState(0);
     const [totalInterest, setTotalInterest] = useState(0);
     const [totalRepayment, setTotalRepayment] = useState(0);
+
+    //for showing the chart
+    const [chartData, setChartData] = useState([]);
 
     useEffect(() => {
     try {
@@ -73,6 +79,33 @@ export default function Page4(){
             setMonthlyPayment(monthly);
             setTotalRepayment(totalPaid);
             setTotalInterest(interestPaid);
+
+            // ✅ Build amortization chart data (year by year)
+            let balance = loanAmount;
+            let data = [];
+
+            for (let year = 1; year <= Number(storedMortgageTerms); year++) {
+                let interestYear = 0;
+                let principalYear = 0;
+
+                for (let month = 1; month <= 12; month++) {
+                    const interestMonth = balance * r;
+                    const principalMonth = monthly - interestMonth;
+                    balance -= principalMonth;
+
+                    interestYear += interestMonth;
+                    principalYear += principalMonth;
+                }
+
+                data.push({
+                    year,
+                    interest: Math.round(interestYear),
+                    principal: Math.round(principalYear),
+                    balance: Math.max(Math.round(balance), 0),
+                });
+            }
+
+            setChartData(data);
         }
     } 
     catch {
@@ -95,16 +128,68 @@ export default function Page4(){
                     <span className="text-[var(--lloyds-black)] text-sm font-semibold absolute right-[6rem] hidden sm:block">Loan To Value: </span>
                 </>}
             />
-            
-            {/* ✅ Results for Fixed Rate */}
-            {pathway.toLowerCase().includes("fixed") && (
-                <div className="mt-6 p-4 border rounded-lg bg-[var(--lloyds-light-grey)]">
-                    <p className="text-[var(--lloyds-black)] font-semibold">Loan Amount: £{Number(loanValue).toLocaleString()}</p>
-                    <p className="text-[var(--lloyds-black)]">Monthly Payment: £{monthlyPayment.toFixed(2)}</p>
-                    <p className="text-[var(--lloyds-black)]">Total Interest Paid: £{totalInterest.toFixed(2)}</p>
-                    <p className="text-[var(--lloyds-black)]">Total Repayment: £{totalRepayment.toFixed(2)}</p>
+
+            {pathway.toLowerCase().includes("fixed") &&
+            <div className="w-[98%] mx-auto flex flex-col sm:flex-row gap-6 mt-8">
+                <div className="w-[98%] sm:w-[40%] flex flex-col mx-auto justify-center sm:order-1 order-2">
+                    <p className="text-lg font-semibold text-[var(--lloyds-dark-green)] mx-2 mb-4 flex flex-row items-center justify-center">
+                        Your Agreement:
+                        <Helper title="Agreement" 
+                            description="Monthly Payment is the monthly cost including loan repayment and interest. Interest paid is the total extra money you'll pay from interest built up over the years. Total repayment is the total you'll pay back (loan + interest accumulated)." 
+                            classExtensions={"text-[var(--lloyds-black)]"}
+                            customPos={"left-4"}
+                        />
+                    </p>
+                    <div className="flex flex-row font-semibold">
+                        <p className="w-[200px] text-center">Your Loaning:</p>
+                        <p className="ml-2">£{Number(loanValue).toFixed(2).toLocaleString()}</p>
+                    </div>
+
+                    <div className="flex flex-row font-semibold">
+                        <p className="w-[200px] text-center">Monthly Payment:</p>
+                        <p className="ml-2">£{Number(monthlyPayment.toFixed(2)).toLocaleString()}</p>
+                    </div>
+
+                    <div className="flex flex-row font-semibold">
+                        <p className="w-[200px] text-center">Total Interest Paid:</p>
+                        <p className="ml-2">£{Number(totalInterest.toFixed(2)).toLocaleString()}</p>
+                    </div>
+
+                    <div className="flex flex-row font-semibold">
+                        <p className="w-[200px] text-center">Total Repayment:</p>
+                        <p className="ml-2">£{Number(totalRepayment.toFixed(2)).toLocaleString()}</p>
+                    </div>
+
+                    <button className="w-[150px] h-[40px] rounded-md text-[var(--lloyds-white)]
+                    font-semibold bg-[var(--lloyds-dark-green)] mt-10 hover:opacity-70 focus:opacity-70
+                    drop-shadow-[0_0_1px_black] mx-auto">View Other Deals</button>
                 </div>
-            )}
+
+                <div className="w-[100%] sm:w-[60%] flex flex-col justify-center items-center sm:order-2">
+                    <h3 className="font-semibold mb-2">Payment Breakdown Over Time</h3>
+                    <ResponsiveContainer width="100%" height={300}>
+                        <LineChart data={chartData}>
+                            <XAxis dataKey="year" />
+                            <YAxis />
+                            <Tooltip formatter={(value) => `£${value.toLocaleString()}`} />
+                            <Legend
+                                verticalAlign="bottom"
+                                align="center"
+                                wrapperStyle={{
+                                    paddingTop: 10,
+                                    display: "flex",
+                                    flexWrap: "wrap",   // allows wrapping on smaller screens
+                                    justifyContent: "center",
+                                    fontSize: "0.8rem", // smaller font for mobile
+                                }}
+                                />
+                            <Line type="monotone" dataKey="interest" stroke="#e63946" name="Interest Paid" />
+                            <Line type="monotone" dataKey="principal" stroke="#2a9d8f" name="Principal Paid" />
+                            <Line type="monotone" dataKey="balance" stroke="#264653" name="Remaining Balance" />
+                        </LineChart>
+                    </ResponsiveContainer>
+                </div>
+            </div>}
         </>
     )
 }
